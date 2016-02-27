@@ -647,8 +647,8 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%pyspark\n\nhtml \u003d \"\"\"\n\u003cscript src\u003d\"http://d3js.org/d3.v3.min.js\" charset\u003d\"utf-8\"\u003e\u003c/script\u003e\n\u003cscript src\u003d\"http://vega.github.io/vega-editor/vendor/vega.js\" charset\u003d\"utf-8\"\u003e\u003c/script\u003e\n\u003cscript src\u003d\"http://vega.github.io/vega-editor/vendor/vega-embed.js\" charset\u003d\"utf-8\"\u003e\u003c/script\u003e\n\"\"\"\n\nprint \"%html \" + html",
-      "dateUpdated": "Feb 26, 2016 9:45:07 AM",
+      "text": "%pyspark\n\nhtml \u003d \"\"\"\n    \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/d3.min.js\"\u003e\u003c/script\u003e\n    \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\"\u003e\u003c/script\u003e\n    \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/topojson.js\"\u003e\u003c/script\u003e\n    \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\"\u003e\u003c/script\u003e\n    \u003cscript src\u003d\"https://vega.github.io/vega/vega.min.js\"\u003e\u003c/script\u003e\n\"\"\"\n\nprint \"%html \" + html",
+      "dateUpdated": "Feb 26, 2016 7:45:40 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -671,17 +671,17 @@
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\n\u003cscript src\u003d\"http://d3js.org/d3.v3.min.js\" charset\u003d\"utf-8\"\u003e\u003c/script\u003e\n\u003cscript src\u003d\"http://vega.github.io/vega-editor/vendor/vega.js\" charset\u003d\"utf-8\"\u003e\u003c/script\u003e\n\u003cscript src\u003d\"http://vega.github.io/vega-editor/vendor/vega-embed.js\" charset\u003d\"utf-8\"\u003e\u003c/script\u003e\n\n"
+        "msg": "\n    \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/d3.min.js\"\u003e\u003c/script\u003e\n    \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\"\u003e\u003c/script\u003e\n    \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/topojson.js\"\u003e\u003c/script\u003e\n    \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\"\u003e\u003c/script\u003e\n    \u003cscript src\u003d\"https://vega.github.io/vega/vega.min.js\"\u003e\u003c/script\u003e\n\n"
       },
       "dateCreated": "Feb 25, 2016 3:05:43 PM",
-      "dateStarted": "Feb 26, 2016 9:45:07 AM",
-      "dateFinished": "Feb 26, 2016 9:45:08 AM",
+      "dateStarted": "Feb 26, 2016 7:45:40 PM",
+      "dateFinished": "Feb 26, 2016 7:45:41 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n\ndesc \u003d \"\"\"\n\u003cscript\u003e\nvg_spec \u003d {\n  \"parameters\": [\n    { \n      \"signal\": \"rotate\", \"type\": \"range\",\n      \"value\": 0, \"min\": -360, \"max\": 360,\n      \"rewrite\": [\"data[0].transform[0].rotate\"]\n    }\n  ],\n  \"spec\": {\n    \"width\": 800,\n    \"height\": 500,\n    \"padding\": 0,\n    \"data\": [\n      {\n        \"name\": \"world\",\n        \"url\": \"data/world-110m.json\",\n        \"format\": {\"type\": \"topojson\", \"feature\": \"countries\"},\n        \"transform\": [{\n          \"type\": \"geopath\",\n          \"projection\": \"winkel3\",\n          \"scale\": 170,\n          \"translate\": [400, 250]\n        }]\n      }\n    ],\n    \"marks\": [\n      {\n        \"type\": \"path\",\n        \"from\": {\"data\": \"world\"},\n        \"properties\": {\n          \"enter\": {\n            \"stroke\": {\"value\": \"#fff\"}\n          },\n          \"update\": {\n            \"path\": {\"field\": \"layout_path\"},\n            \"fill\": {\"value\": \"#ccc\"}\n          },\n          \"hover\": {\n            \"fill\": {\"value\": \"pink\"}\n          }\n        }\n      }\n    ]\n  }\n};\n\u003c/script\u003e\n\"\"\"\n\n\nprint \"%html \" + desc\n",
-      "dateUpdated": "Feb 26, 2016 9:41:24 AM",
+      "dateUpdated": "Feb 26, 2016 7:26:34 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -707,14 +707,48 @@
         "msg": "\n\u003cscript\u003e\nvg_spec \u003d {\n  \"parameters\": [\n    { \n      \"signal\": \"rotate\", \"type\": \"range\",\n      \"value\": 0, \"min\": -360, \"max\": 360,\n      \"rewrite\": [\"data[0].transform[0].rotate\"]\n    }\n  ],\n  \"spec\": {\n    \"width\": 800,\n    \"height\": 500,\n    \"padding\": 0,\n    \"data\": [\n      {\n        \"name\": \"world\",\n        \"url\": \"data/world-110m.json\",\n        \"format\": {\"type\": \"topojson\", \"feature\": \"countries\"},\n        \"transform\": [{\n          \"type\": \"geopath\",\n          \"projection\": \"winkel3\",\n          \"scale\": 170,\n          \"translate\": [400, 250]\n        }]\n      }\n    ],\n    \"marks\": [\n      {\n        \"type\": \"path\",\n        \"from\": {\"data\": \"world\"},\n        \"properties\": {\n          \"enter\": {\n            \"stroke\": {\"value\": \"#fff\"}\n          },\n          \"update\": {\n            \"path\": {\"field\": \"layout_path\"},\n            \"fill\": {\"value\": \"#ccc\"}\n          },\n          \"hover\": {\n            \"fill\": {\"value\": \"pink\"}\n          }\n        }\n      }\n    ]\n  }\n};\n\u003c/script\u003e\n\n"
       },
       "dateCreated": "Feb 26, 2016 9:16:41 AM",
-      "dateStarted": "Feb 26, 2016 9:41:24 AM",
-      "dateFinished": "Feb 26, 2016 9:41:24 AM",
+      "dateStarted": "Feb 26, 2016 7:26:34 PM",
+      "dateFinished": "Feb 26, 2016 7:26:35 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%pyspark\n\nembed \u003d \"\"\"\n\u003cscript\u003e\nvg.embed(\u0027#vis\u0027, spec, function(error, result) {\n    alert(result);\n});\n\u003c/script\u003e\n\u003cdiv id\u003d\u0027vis\u0027\u003e\u003c/div\u003e\n\"\"\"\n\nprint \"%html \" + embed",
-      "dateUpdated": "Feb 26, 2016 12:17:23 PM",
+      "text": "%pyspark\n\nembed \u003d \"\"\"\n\u003cscript\u003e\nvar spec \u003d {\n  \"width\": 400,\n  \"height\": 400,\n  \"data\": [\n    {\n      \"name\": \"table\",\n      \"values\": [12, 23, 47, 6, 52, 69],\n      \"transform\": [{\"type\": \"pie\", \"field\": \"data\"}]\n    }\n  ],\n  \"scales\": [\n    {\n      \"name\": \"r\",\n      \"type\": \"sqrt\",\n      \"domain\": {\"data\": \"table\", \"field\": \"data\"},\n      \"range\": [20, 100]\n    }\n  ],\n  \"marks\": [\n    {\n      \"type\": \"arc\",\n      \"from\": {\"data\": \"table\"},\n      \"properties\": {\n        \"enter\": {\n          \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5},\n          \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5},\n          \"startAngle\": {\"field\": \"layout_start\"},\n          \"endAngle\": {\"field\": \"layout_end\"},\n          \"innerRadius\": {\"value\": 20},\n          \"outerRadius\": {\"scale\": \"r\", \"field\": \"data\"},\n          \"stroke\": {\"value\": \"#fff\"}\n        },\n        \"update\": {\n          \"fill\": {\"value\": \"#ccc\"}\n        },\n        \"hover\": {\n          \"fill\": {\"value\": \"pink\"}\n        }\n      }\n    },\n    {\n      \"type\": \"text\",\n      \"from\": {\"data\": \"table\"},\n      \"properties\": {\n        \"enter\": {\n          \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5},\n          \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5},\n          \"radius\": {\"scale\": \"r\", \"field\": \"data\", \"offset\": 8},\n          \"theta\": {\"field\": \"layout_mid\"},\n          \"fill\": {\"value\": \"#000\"},\n          \"align\": {\"value\": \"center\"},\n          \"baseline\": {\"value\": \"middle\"},\n          \"text\": {\"field\": \"data\"}\n        }\n      }\n    }\n  ]\n}\n    vg.parse.spec(spec, function(error, chart) { chart({el:\"#vis\"}).update(); });\n\u003c/script\u003e\n\u003cdiv id\u003d\u0027vis\u0027\u003e\u003c/div\u003e\n\"\"\"\n\nprint \"%html \" + embed",
+      "dateUpdated": "Feb 26, 2016 7:50:23 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala",
+        "lineNumbers": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1456474895734_122439459",
+      "id": "20160226-092135_1680137538",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\n\u003cscript\u003e\n    var spec \u003d {\n  \"width\": 400,\n  \"height\": 400,\n  \"data\": [\n    {\n      \"name\": \"table\",\n      \"values\": [12, 23, 47, 6, 52, 69],\n      \"transform\": [{\"type\": \"pie\", \"field\": \"data\"}]\n    }\n  ],\n  \"scales\": [\n    {\n      \"name\": \"r\",\n      \"type\": \"sqrt\",\n      \"domain\": {\"data\": \"table\", \"field\": \"data\"},\n      \"range\": [20, 100]\n    }\n  ],\n  \"marks\": [\n    {\n      \"type\": \"arc\",\n      \"from\": {\"data\": \"table\"},\n      \"properties\": {\n        \"enter\": {\n          \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5},\n          \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5},\n          \"startAngle\": {\"field\": \"layout_start\"},\n          \"endAngle\": {\"field\": \"layout_end\"},\n          \"innerRadius\": {\"value\": 20},\n          \"outerRadius\": {\"scale\": \"r\", \"field\": \"data\"},\n          \"stroke\": {\"value\": \"#fff\"}\n        },\n        \"update\": {\n          \"fill\": {\"value\": \"#ccc\"}\n        },\n        \"hover\": {\n          \"fill\": {\"value\": \"pink\"}\n        }\n      }\n    },\n    {\n      \"type\": \"text\",\n      \"from\": {\"data\": \"table\"},\n      \"properties\": {\n        \"enter\": {\n          \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5},\n          \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5},\n          \"radius\": {\"scale\": \"r\", \"field\": \"data\", \"offset\": 8},\n          \"theta\": {\"field\": \"layout_mid\"},\n          \"fill\": {\"value\": \"#000\"},\n          \"align\": {\"value\": \"center\"},\n          \"baseline\": {\"value\": \"middle\"},\n          \"text\": {\"field\": \"data\"}\n        }\n      }\n    }\n  ]\n}\n    vg.parse.spec(spec, function(error, chart) { chart({el:\"#vis\"}).update(); });\n\u003c/script\u003e\n\u003cdiv id\u003d\u0027vis\u0027\u003e\u003c/div\u003e\n\n"
+      },
+      "dateCreated": "Feb 26, 2016 9:21:35 AM",
+      "dateStarted": "Feb 26, 2016 7:50:05 PM",
+      "dateFinished": "Feb 26, 2016 7:50:06 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\nimport json\n\ndef createSpec(data):\n    return {\n    \"data\": [{\"name\": \"table\",\n   \"transform\": [{\"field\": \"data\", \"type\": \"pie\"}],\n   \"values\": data}],\n \"height\": 400,\n \"marks\": [{\"from\": {\"data\": \"table\"},\n   \"properties\": {\"enter\": {\"endAngle\": {\"field\": \"layout_end\"},\n     \"innerRadius\": {\"value\": 20},\n     \"outerRadius\": {\"field\": \"data\", \"scale\": \"r\"},\n     \"startAngle\": {\"field\": \"layout_start\"},\n     \"stroke\": {\"value\": \"#fff\"},\n     \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5},\n     \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5}},\n    \"hover\": {\"fill\": {\"value\": \"pink\"}},\n    \"update\": {\"fill\": {\"value\": \"#ccc\"}}},\n   \"type\": \"arc\"},\n  {\"from\": {\"data\": \"table\"},\n   \"properties\": {\"enter\": {\"align\": {\"value\": \"center\"},\n     \"baseline\": {\"value\": \"middle\"},\n     \"fill\": {\"value\": \"#000\"},\n     \"radius\": {\"field\": \"data\", \"offset\": 8, \"scale\": \"r\"},\n     \"text\": {\"field\": \"data\"},\n     \"theta\": {\"field\": \"layout_mid\"},\n     \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5},\n     \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5}}},\n   \"type\": \"text\"}],\n \"scales\": [{\"domain\": {\"data\": \"table\", \"field\": \"data\"},\n   \"name\": \"r\",\n   \"range\": [20, 100],\n   \"type\": \"sqrt\"}],\n \"width\": 400}\n\ndef show(spec):\n    print \"\"\"%html\n        \u003cscript\u003e\n        var spec \u003d \"\"\" + json.dumps(spec) + \"\"\"\n            vg.parse.spec(spec, function(error, chart) { chart({el:\"#vis2\"}).update(); });\n        \u003c/script\u003e\n        \u003cdiv id\u003d\u0027vis2\u0027\u003e\u003c/div\u003e\n    \"\"\"\n",
+      "dateUpdated": "Feb 26, 2016 7:55:14 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -732,16 +766,49 @@
         "params": {},
         "forms": {}
       },
-      "jobName": "paragraph_1456474895734_122439459",
-      "id": "20160226-092135_1680137538",
+      "jobName": "paragraph_1456512901559_-1266651103",
+      "id": "20160226-195501_802177847",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Feb 26, 2016 7:55:01 PM",
+      "dateStarted": "Feb 26, 2016 7:55:14 PM",
+      "dateFinished": "Feb 26, 2016 7:55:15 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n    \ndata \u003d [12, 23, 47, 6, 32, 19]\n\njsSpec \u003d createSpec(data)\nshow(jsSpec)",
+      "dateUpdated": "Feb 26, 2016 8:03:54 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1456476105125_-1181563220",
+      "id": "20160226-094145_2096763003",
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\n\u003cscript\u003e\nvg.embed(\u0027#vis\u0027, spec, function(error, result) {\n    alert(result);\n});\n\u003c/script\u003e\n\u003cdiv id\u003d\u0027vis\u0027\u003e\u003c/div\u003e\n\n"
+        "msg": "        \u003cscript\u003e\n        var spec \u003d {\"scales\": [{\"range\": [20, 100], \"domain\": {\"field\": \"data\", \"data\": \"table\"}, \"type\": \"sqrt\", \"name\": \"r\"}], \"width\": 400, \"marks\": [{\"type\": \"arc\", \"from\": {\"data\": \"table\"}, \"properties\": {\"hover\": {\"fill\": {\"value\": \"pink\"}}, \"update\": {\"fill\": {\"value\": \"#ccc\"}}, \"enter\": {\"outerRadius\": {\"field\": \"data\", \"scale\": \"r\"}, \"innerRadius\": {\"value\": 20}, \"endAngle\": {\"field\": \"layout_end\"}, \"stroke\": {\"value\": \"#fff\"}, \"startAngle\": {\"field\": \"layout_start\"}, \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5}, \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5}}}}, {\"type\": \"text\", \"from\": {\"data\": \"table\"}, \"properties\": {\"enter\": {\"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5}, \"radius\": {\"field\": \"data\", \"scale\": \"r\", \"offset\": 8}, \"baseline\": {\"value\": \"middle\"}, \"theta\": {\"field\": \"layout_mid\"}, \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5}, \"text\": {\"field\": \"data\"}, \"align\": {\"value\": \"center\"}, \"fill\": {\"value\": \"#000\"}}}}], \"data\": [{\"values\": [12, 23, 47, 6, 32, 19], \"name\": \"table\", \"transform\": [{\"field\": \"data\", \"type\": \"pie\"}]}], \"height\": 400}\n            vg.parse.spec(spec, function(error, chart) { chart({el:\"#vis2\"}).update(); });\n        \u003c/script\u003e\n        \u003cdiv id\u003d\u0027vis2\u0027\u003e\u003c/div\u003e\n    \n"
       },
-      "dateCreated": "Feb 26, 2016 9:21:35 AM",
-      "dateStarted": "Feb 26, 2016 12:17:23 PM",
-      "dateFinished": "Feb 26, 2016 12:17:23 PM",
+      "dateCreated": "Feb 26, 2016 9:41:45 AM",
+      "dateStarted": "Feb 26, 2016 8:03:54 PM",
+      "dateFinished": "Feb 26, 2016 8:03:55 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -751,9 +818,9 @@
         "params": {},
         "forms": {}
       },
-      "jobName": "paragraph_1456476105125_-1181563220",
-      "id": "20160226-094145_2096763003",
-      "dateCreated": "Feb 26, 2016 9:41:45 AM",
+      "jobName": "paragraph_1456511962253_-247432653",
+      "id": "20160226-193922_1967458542",
+      "dateCreated": "Feb 26, 2016 7:39:22 PM",
       "status": "READY",
       "progressUpdateIntervalMs": 500
     }

@@ -177,9 +177,11 @@ zshow(plt)
 %pyspark
 
 html = """
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="http://vega.github.io/vega-editor/vendor/vega.js" charset="utf-8"></script>
-<script src="http://vega.github.io/vega-editor/vendor/vega-embed.js" charset="utf-8"></script>
+    <script src="https://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="https://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="https://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="https://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="https://vega.github.io/vega/vega.min.js"></script>
 """
 
 print "%html " + html
@@ -250,13 +252,128 @@ print "%html " + desc
 
 embed = """
 <script>
-vg.embed('#vis', spec, function(error, result) {
-    alert(result);
-});
+var spec = {
+  "width": 400,
+  "height": 400,
+  "data": [
+    {
+      "name": "table",
+      "values": [12, 23, 47, 6, 52, 69],
+      "transform": [{"type": "pie", "field": "data"}]
+    }
+  ],
+  "scales": [
+    {
+      "name": "r",
+      "type": "sqrt",
+      "domain": {"data": "table", "field": "data"},
+      "range": [20, 100]
+    }
+  ],
+  "marks": [
+    {
+      "type": "arc",
+      "from": {"data": "table"},
+      "properties": {
+        "enter": {
+          "x": {"field": {"group": "width"}, "mult": 0.5},
+          "y": {"field": {"group": "height"}, "mult": 0.5},
+          "startAngle": {"field": "layout_start"},
+          "endAngle": {"field": "layout_end"},
+          "innerRadius": {"value": 20},
+          "outerRadius": {"scale": "r", "field": "data"},
+          "stroke": {"value": "#fff"}
+        },
+        "update": {
+          "fill": {"value": "#ccc"}
+        },
+        "hover": {
+          "fill": {"value": "pink"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "table"},
+      "properties": {
+        "enter": {
+          "x": {"field": {"group": "width"}, "mult": 0.5},
+          "y": {"field": {"group": "height"}, "mult": 0.5},
+          "radius": {"scale": "r", "field": "data", "offset": 8},
+          "theta": {"field": "layout_mid"},
+          "fill": {"value": "#000"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "text": {"field": "data"}
+        }
+      }
+    }
+  ]
+}
+    vg.parse.spec(spec, function(error, chart) { chart({el:"#vis"}).update(); });
 </script>
 <div id='vis'></div>
 """
 
 print "%html " + embed
+```
+
+
+```python
+%pyspark
+import json
+
+def createSpec(data):
+    return {
+    "data": [{"name": "table",
+   "transform": [{"field": "data", "type": "pie"}],
+   "values": data}],
+ "height": 400,
+ "marks": [{"from": {"data": "table"},
+   "properties": {"enter": {"endAngle": {"field": "layout_end"},
+     "innerRadius": {"value": 20},
+     "outerRadius": {"field": "data", "scale": "r"},
+     "startAngle": {"field": "layout_start"},
+     "stroke": {"value": "#fff"},
+     "x": {"field": {"group": "width"}, "mult": 0.5},
+     "y": {"field": {"group": "height"}, "mult": 0.5}},
+    "hover": {"fill": {"value": "pink"}},
+    "update": {"fill": {"value": "#ccc"}}},
+   "type": "arc"},
+  {"from": {"data": "table"},
+   "properties": {"enter": {"align": {"value": "center"},
+     "baseline": {"value": "middle"},
+     "fill": {"value": "#000"},
+     "radius": {"field": "data", "offset": 8, "scale": "r"},
+     "text": {"field": "data"},
+     "theta": {"field": "layout_mid"},
+     "x": {"field": {"group": "width"}, "mult": 0.5},
+     "y": {"field": {"group": "height"}, "mult": 0.5}}},
+   "type": "text"}],
+ "scales": [{"domain": {"data": "table", "field": "data"},
+   "name": "r",
+   "range": [20, 100],
+   "type": "sqrt"}],
+ "width": 400}
+
+def show(spec):
+    print """%html
+        <script>
+        var spec = """ + json.dumps(spec) + """
+            vg.parse.spec(spec, function(error, chart) { chart({el:"#vis2"}).update(); });
+        </script>
+        <div id='vis2'></div>
+    """
+
+```
+
+
+```python
+%pyspark
+    
+data = [12, 23, 47, 6, 32, 19]
+
+jsSpec = createSpec(data)
+show(jsSpec)
 ```
 
