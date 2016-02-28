@@ -3,7 +3,7 @@
     {
       "text": "%pyspark\n\nprint sc.version",
       "authenticationInfo": {},
-      "dateUpdated": "Feb 27, 2016 8:08:38 PM",
+      "dateUpdated": "Feb 28, 2016 9:18:35 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -30,8 +30,8 @@
         "msg": "1.6.0\n"
       },
       "dateCreated": "Feb 25, 2016 12:43:07 PM",
-      "dateStarted": "Feb 27, 2016 8:08:38 PM",
-      "dateFinished": "Feb 27, 2016 8:08:41 PM",
+      "dateStarted": "Feb 28, 2016 9:18:36 AM",
+      "dateFinished": "Feb 28, 2016 9:19:47 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -180,7 +180,7 @@
     {
       "text": "%pyspark\n\ndef parse(line):\n    m \u003d {u\u0027Iris-virginica\u0027:0, u\u0027Iris-setosa\u0027:1, u\u0027Iris-versicolor\u0027:2}\n    if len(line.strip()) \u003e 0:\n        parts \u003d line.split(\",\")\n        return [float(f) for f in parts[0:4]] + [parts[4], m[parts[4]]]\n    \niris \u003d sc.textFile(\"file:///tmp/iris.data\").filter(lambda line: len(line.strip()) \u003e 0).map(parse)\n\npprint(iris, num\u003d10, sampleRatio\u003d0.06, seed\u003d123, columns\u003d[\"sepal-length\", \"sepal-width\", \"petal-length\", \"petal-width\", \"name\", \"species\"])\n",
       "authenticationInfo": {},
-      "dateUpdated": "Feb 27, 2016 8:09:06 PM",
+      "dateUpdated": "Feb 28, 2016 11:00:55 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -226,14 +226,14 @@
       "jobName": "paragraph_1456400692061_1787727548",
       "id": "20160225-124452_1108601832",
       "result": {
-        "code": "SUCCESS",
-        "type": "TABLE",
-        "msg": "sepal-length\tsepal-width\tpetal-length\tpetal-width\tname\tspecies\n4.6\t3.1\t1.5\t0.2\tIris-setosa\t1\n5.8\t4.0\t1.2\t0.2\tIris-setosa\t1\n4.9\t3.1\t1.5\t0.1\tIris-setosa\t1\n5.5\t2.3\t4.0\t1.3\tIris-versicolor\t2\n5.6\t2.5\t3.9\t1.1\tIris-versicolor\t2\n7.3\t2.9\t6.3\t1.8\tIris-virginica\t0\n6.9\t3.2\t5.7\t2.3\tIris-virginica\t0\n6.7\t3.0\t5.2\t2.3\tIris-virginica\t0\n\n"
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "Traceback (most recent call last):\n  File \"/var/folders/kp/d2rljdbn5m1cmh4x_ttg2pp40000gn/T//zeppelin_pyspark.py\", line 222, in \u003cmodule\u003e\n    eval(compiledCode)\n  File \"\u003cstring\u003e\", line 7, in \u003cmodule\u003e\nNameError: name \u0027pprint\u0027 is not defined\n"
       },
       "dateCreated": "Feb 25, 2016 12:44:52 PM",
-      "dateStarted": "Feb 27, 2016 8:09:07 PM",
-      "dateFinished": "Feb 27, 2016 8:09:24 PM",
-      "status": "FINISHED",
+      "dateStarted": "Feb 28, 2016 11:00:55 AM",
+      "dateFinished": "Feb 28, 2016 11:01:06 AM",
+      "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
@@ -341,9 +341,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n\n## 2 Integration of Visualization libraries into Zeppelin\n\n### 2.1 Integration of MatplotLib via HTML and SVG",
+      "text": "%md\n\n## 2 Integration of Visualization libraries into Zeppelin\n\n### 2.1 Integration of MatplotLib via HTML and SVG\n\nSee [Matplotlib](http://matplotlib.org/)",
       "authenticationInfo": {},
-      "dateUpdated": "Feb 27, 2016 2:56:17 PM",
+      "dateUpdated": "Feb 28, 2016 10:45:13 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -368,11 +368,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\u003ch2\u003e2 Integration of Visualization libraries into Zeppelin\u003c/h2\u003e\n\u003ch3\u003e2.1 Integration of MatplotLib via HTML and SVG\u003c/h3\u003e\n"
+        "msg": "\u003ch2\u003e2 Integration of Visualization libraries into Zeppelin\u003c/h2\u003e\n\u003ch3\u003e2.1 Integration of MatplotLib via HTML and SVG\u003c/h3\u003e\n\u003cp\u003eSee \u003ca href\u003d\"http://matplotlib.org/\"\u003eMatplotlib\u003c/a\u003e\u003c/p\u003e\n"
       },
       "dateCreated": "Feb 26, 2016 12:11:41 PM",
-      "dateStarted": "Feb 27, 2016 2:56:11 PM",
-      "dateFinished": "Feb 27, 2016 2:56:13 PM",
+      "dateStarted": "Feb 28, 2016 10:45:05 AM",
+      "dateFinished": "Feb 28, 2016 10:45:12 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -482,41 +482,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "",
+      "text": "%md\n\n### 2.2 Integration of Bokeh via HTML and javascript\n\nSee [Bokeh](http://bokeh.pydata.org/en/latest/)",
       "authenticationInfo": {},
-      "dateUpdated": "Feb 27, 2016 8:11:24 PM",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {}
-        },
-        "enabled": true,
-        "editorMode": "ace/mode/scala"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "jobName": "paragraph_1456583781364_1783079256",
-      "id": "20160227-153621_559852905",
-      "result": "org.apache.thrift.transport.TTransportException",
-      "dateCreated": "Feb 27, 2016 3:36:21 PM",
-      "dateStarted": "Feb 27, 2016 3:36:45 PM",
-      "dateFinished": "Feb 27, 2016 3:39:01 PM",
-      "status": "FINISHED",
-      "errorMessage": "org.apache.thrift.transport.TTransportException\n\tat org.apache.thrift.transport.TIOStreamTransport.read(TIOStreamTransport.java:132)\n\tat org.apache.thrift.transport.TTransport.readAll(TTransport.java:86)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readAll(TBinaryProtocol.java:429)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readI32(TBinaryProtocol.java:318)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readMessageBegin(TBinaryProtocol.java:219)\n\tat org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:69)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.recv_interpret(RemoteInterpreterService.java:237)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.interpret(RemoteInterpreterService.java:222)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:222)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:93)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:228)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:171)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:326)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "text": "%md\n\n### 2.2 Integration of Bokeh via HTML and javascript",
-      "authenticationInfo": {},
-      "dateUpdated": "Feb 27, 2016 2:55:56 PM",
+      "dateUpdated": "Feb 28, 2016 10:46:19 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -541,11 +509,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\u003ch3\u003e2.2 Integration of Bokeh via HTML and javascript\u003c/h3\u003e\n"
+        "msg": "\u003ch3\u003e2.2 Integration of Bokeh via HTML and javascript\u003c/h3\u003e\n\u003cp\u003eSee \u003ca href\u003d\"http://bokeh.pydata.org/en/latest/\"\u003eBokeh\u003c/a\u003e\u003c/p\u003e\n"
       },
       "dateCreated": "Feb 27, 2016 2:55:04 PM",
-      "dateStarted": "Feb 27, 2016 2:55:51 PM",
-      "dateFinished": "Feb 27, 2016 2:55:53 PM",
+      "dateStarted": "Feb 28, 2016 10:46:10 AM",
+      "dateFinished": "Feb 28, 2016 10:46:16 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -687,9 +655,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md \n## 2.3 Integration of Vega via HTML and Javascript",
+      "text": "%md \n## 2.3 Integration of Vega and Vega-Lite via HTML and Javascript\n\nSee [Vega](http://vega.github.io/vega/) and [Vega-Lite](https://vega.github.io/vega-lite/)\n\nSamples: [Online Editor and Samples](http://vega.github.io/vega-editor/)",
       "authenticationInfo": {},
-      "dateUpdated": "Feb 27, 2016 3:02:15 PM",
+      "dateUpdated": "Feb 28, 2016 10:49:15 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -714,18 +682,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\u003ch2\u003e2.3 Integration of Vega via HTML and Javascript\u003c/h2\u003e\n"
+        "msg": "\u003ch2\u003e2.3 Integration of Vega and Vega-Lite via HTML and Javascript\u003c/h2\u003e\n\u003cp\u003eSee \u003ca href\u003d\"http://vega.github.io/vega/\"\u003eVega\u003c/a\u003e and \u003ca href\u003d\"https://vega.github.io/vega-lite/\"\u003eVega-Lite\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eSamples: \u003ca href\u003d\"http://vega.github.io/vega-editor/\"\u003eOnline Editor and Samples\u003c/a\u003e\u003c/p\u003e\n"
       },
       "dateCreated": "Feb 27, 2016 3:01:31 PM",
-      "dateStarted": "Feb 27, 2016 3:02:02 PM",
-      "dateFinished": "Feb 27, 2016 3:02:10 PM",
+      "dateStarted": "Feb 28, 2016 10:49:12 AM",
+      "dateFinished": "Feb 28, 2016 10:49:19 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%pyspark\n\ndef loadVega():\n    html \u003d \"\"\"\n        \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/d3.min.js\"\u003e\u003c/script\u003e\n        \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\"\u003e\u003c/script\u003e\n        \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/topojson.js\"\u003e\u003c/script\u003e\n        \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\"\u003e\u003c/script\u003e\n        \u003cscript src\u003d\"https://vega.github.io/vega/vega.min.js\"\u003e\u003c/script\u003e\n        \u003cdiv\u003eOK\u003c/div\u003e\n    \"\"\"\n    \n    print \"%html \" + html\n\n\ndef showVega(spec):\n    from uuid import uuid4\n    import json\n    \n    if isinstance(spec, dict):\n        spec \u003d json.dumps(spec)\n        \n    id \u003d \"vega_%s\" % uuid4().hex\n    print \"\"\"%html\n\u003cscript\u003e\n    var spec \u003d \"\"\" + spec + \"\"\"\n    vg.parse.spec(spec, function(error, chart) { chart({el:\"#%s\"}).update(); });\n\u003c/script\u003e\n\u003cdiv id\u003d\u0027%s\u0027\u003e\u003c/div\u003e\n\"\"\" % (id, id)\n",
+      "text": "%pyspark\n\ndef loadVega():\n    html \u003d \"\"\"\n        \u003cscript src\u003d\"//d3js.org/d3.v3.min.js\"\u003e\u003c/script\u003e\n        \u003cscript src\u003d\"//vega.github.io/vega/vega.js\"\u003e\u003c/script\u003e\n        \u003cscript src\u003d\"//vega.github.io/vega-lite/vega-lite.js\"\u003e\u003c/script\u003e\n        \u003cdiv\u003eOK\u003c/div\u003e\n    \"\"\"\n    \n    print \"%html \" + html\n\n\n\ndef showVega(spec, mode\u003d\"vega\"):\n    from uuid import uuid4\n    import json\n    \n    if isinstance(spec, dict):\n        spec \u003d json.dumps(spec)\n    \n    id \u003d \"vega_%s\" % uuid4().hex\n    \n    print \"\"\"%html\n\u003cscript\u003e\n  preprocessor \u003d function(spec, mode) {\n    return (mode \u003d\u003d \u0027vega\u0027) ? spec : vl.compile(spec).spec\n  }\n  var spec \u003d preprocessor(\"\"\" + spec + \"\"\" , \u0027%s\u0027);\n  vg.parse.spec(spec, function(error, chart) { chart({el:\"#%s\"}).update(); });\n\u003c/script\u003e\n\u003cdiv id\u003d\u0027%s\u0027\u003e\u003c/div\u003e\n\"\"\" % (mode, id, id)    # adding spec as a format param here ends up in an error\n\n",
       "authenticationInfo": {},
-      "dateUpdated": "Feb 27, 2016 8:05:02 PM",
+      "dateUpdated": "Feb 28, 2016 10:36:48 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -751,15 +719,15 @@
         "msg": ""
       },
       "dateCreated": "Feb 27, 2016 2:55:12 PM",
-      "dateStarted": "Feb 27, 2016 8:05:02 PM",
-      "dateFinished": "Feb 27, 2016 8:05:06 PM",
+      "dateStarted": "Feb 28, 2016 10:36:48 AM",
+      "dateFinished": "Feb 28, 2016 10:36:52 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n\nloadVega()\n",
       "authenticationInfo": {},
-      "dateUpdated": "Feb 27, 2016 8:05:08 PM",
+      "dateUpdated": "Feb 28, 2016 9:20:54 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -783,18 +751,54 @@
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\n        \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/d3.min.js\"\u003e\u003c/script\u003e\n        \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js\"\u003e\u003c/script\u003e\n        \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/topojson.js\"\u003e\u003c/script\u003e\n        \u003cscript src\u003d\"https://vega.github.io/vega-editor/vendor/d3.layout.cloud.js\"\u003e\u003c/script\u003e\n        \u003cscript src\u003d\"https://vega.github.io/vega/vega.min.js\"\u003e\u003c/script\u003e\n        \u003cdiv\u003eOK\u003c/div\u003e\n    \n"
+        "msg": "\n        \u003cscript src\u003d\"//d3js.org/d3.v3.min.js\"\u003e\u003c/script\u003e\n        \u003cscript src\u003d\"//vega.github.io/vega/vega.js\"\u003e\u003c/script\u003e\n        \u003cscript src\u003d\"//vega.github.io/vega-lite/vega-lite.js\"\u003e\u003c/script\u003e\n        \u003cdiv\u003eOK\u003c/div\u003e\n    \n"
       },
       "dateCreated": "Feb 27, 2016 3:07:20 PM",
-      "dateStarted": "Feb 27, 2016 8:05:08 PM",
-      "dateFinished": "Feb 27, 2016 8:05:11 PM",
+      "dateStarted": "Feb 28, 2016 9:20:55 AM",
+      "dateFinished": "Feb 28, 2016 9:21:01 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n### 2.3.1 Vega\n\n**Note**: Plots are interactive",
+      "authenticationInfo": {},
+      "dateUpdated": "Feb 28, 2016 10:50:08 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1456652492588_-1624784145",
+      "id": "20160228-104132_1541650042",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch3\u003e2.3.1 Vega\u003c/h3\u003e\n\u003cp\u003e\u003cstrong\u003eNote\u003c/strong\u003e: Plots are interactive\u003c/p\u003e\n"
+      },
+      "dateCreated": "Feb 28, 2016 10:41:32 AM",
+      "dateStarted": "Feb 28, 2016 10:50:06 AM",
+      "dateFinished": "Feb 28, 2016 10:50:10 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n\ndata \u003d []\nscales \u003d []\nmarks \u003d []\n\ndata.append(\n    { \n      \"name\": \"table\",\n      \"values\": [12, 23, 45, 6, 52, 69],\n      \"transform\": [{\"type\": \"pie\", \"field\": \"data\"}]\n    }\n)\n\nscales.append(\n    { \n      \"name\": \"r\",\n      \"type\": \"sqrt\",\n      \"domain\": {\"data\": \"table\", \"field\": \"data\"},\n      \"range\": [20, 100]\n    }\n)\n\nmarks.append(\n     {\n      \"type\": \"arc\",\n      \"from\": {\"data\": \"table\"},\n      \"properties\": {\n        \"enter\": {\n          \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5},\n          \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5},\n          \"startAngle\": {\"field\": \"layout_start\"},\n          \"endAngle\": {\"field\": \"layout_end\"},\n          \"innerRadius\": {\"value\": 20},\n          \"outerRadius\": {\"scale\": \"r\", \"field\": \"data\"},\n          \"stroke\": {\"value\": \"#fff\"}\n        },\n        \"update\": {\n          \"fill\": {\"value\": \"#ccc\"}\n        },\n        \"hover\": {\n          \"fill\": {\"value\": \"pink\"}\n        }\n      }\n    }\n)\n\nmarks.append(\n     {\n      \"type\": \"text\",\n      \"from\": {\"data\": \"table\"},\n      \"properties\": {\n        \"enter\": {\n          \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5},\n          \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5},\n          \"radius\": {\"scale\": \"r\", \"field\": \"data\", \"offset\": 8},\n          \"theta\": {\"field\": \"layout_mid\"},\n          \"fill\": {\"value\": \"#000\"},\n          \"align\": {\"value\": \"center\"},\n          \"baseline\": {\"value\": \"middle\"},\n          \"text\": {\"field\": \"data\"}\n        }\n      }\n    }\n)\n\nspec \u003d {\n  \"width\": 400,\n  \"height\": 400,\n  \"data\": data,\n  \"scales\": scales,\n  \"marks\": marks\n}\n\nshowVega(spec)",
       "authenticationInfo": {},
-      "dateUpdated": "Feb 27, 2016 8:05:20 PM",
+      "dateUpdated": "Feb 28, 2016 9:21:03 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -818,18 +822,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\u003cscript\u003e\n    var spec \u003d {\"marks\": [{\"from\": {\"data\": \"table\"}, \"type\": \"arc\", \"properties\": {\"hover\": {\"fill\": {\"value\": \"pink\"}}, \"update\": {\"fill\": {\"value\": \"#ccc\"}}, \"enter\": {\"outerRadius\": {\"field\": \"data\", \"scale\": \"r\"}, \"innerRadius\": {\"value\": 20}, \"endAngle\": {\"field\": \"layout_end\"}, \"stroke\": {\"value\": \"#fff\"}, \"startAngle\": {\"field\": \"layout_start\"}, \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5}, \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5}}}}, {\"from\": {\"data\": \"table\"}, \"type\": \"text\", \"properties\": {\"enter\": {\"radius\": {\"field\": \"data\", \"scale\": \"r\", \"offset\": 8}, \"baseline\": {\"value\": \"middle\"}, \"theta\": {\"field\": \"layout_mid\"}, \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5}, \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5}, \"align\": {\"value\": \"center\"}, \"text\": {\"field\": \"data\"}, \"fill\": {\"value\": \"#000\"}}}}], \"width\": 400, \"scales\": [{\"range\": [20, 100], \"domain\": {\"field\": \"data\", \"data\": \"table\"}, \"type\": \"sqrt\", \"name\": \"r\"}], \"data\": [{\"values\": [12, 23, 45, 6, 52, 69], \"name\": \"table\", \"transform\": [{\"field\": \"data\", \"type\": \"pie\"}]}], \"height\": 400}\n    vg.parse.spec(spec, function(error, chart) { chart({el:\"#vega_fe77fcaee8eb4781b70877cf75388b88\"}).update(); });\n\u003c/script\u003e\n\u003cdiv id\u003d\u0027vega_fe77fcaee8eb4781b70877cf75388b88\u0027\u003e\u003c/div\u003e\n\n"
+        "msg": "\u003cscript\u003e\n  preprocessor \u003d function(spec, mode) {\n    return (mode \u003d\u003d \u0027vega\u0027) ? spec : vl.compile(vljson).spec\n  }\n  var spec \u003d preprocessor({\"marks\": [{\"from\": {\"data\": \"table\"}, \"type\": \"arc\", \"properties\": {\"hover\": {\"fill\": {\"value\": \"pink\"}}, \"update\": {\"fill\": {\"value\": \"#ccc\"}}, \"enter\": {\"outerRadius\": {\"field\": \"data\", \"scale\": \"r\"}, \"innerRadius\": {\"value\": 20}, \"endAngle\": {\"field\": \"layout_end\"}, \"stroke\": {\"value\": \"#fff\"}, \"startAngle\": {\"field\": \"layout_start\"}, \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5}, \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5}}}}, {\"from\": {\"data\": \"table\"}, \"type\": \"text\", \"properties\": {\"enter\": {\"radius\": {\"field\": \"data\", \"scale\": \"r\", \"offset\": 8}, \"baseline\": {\"value\": \"middle\"}, \"theta\": {\"field\": \"layout_mid\"}, \"y\": {\"field\": {\"group\": \"height\"}, \"mult\": 0.5}, \"x\": {\"field\": {\"group\": \"width\"}, \"mult\": 0.5}, \"align\": {\"value\": \"center\"}, \"text\": {\"field\": \"data\"}, \"fill\": {\"value\": \"#000\"}}}}], \"width\": 400, \"scales\": [{\"range\": [20, 100], \"domain\": {\"field\": \"data\", \"data\": \"table\"}, \"type\": \"sqrt\", \"name\": \"r\"}], \"data\": [{\"values\": [12, 23, 45, 6, 52, 69], \"name\": \"table\", \"transform\": [{\"field\": \"data\", \"type\": \"pie\"}]}], \"height\": 400} , \u0027vega\u0027);\n  vg.parse.spec(spec, function(error, chart) { chart({el:\"#vega_2c269f03cb974775adb4f0bd42bcd063\"}).update(); });\n\u003c/script\u003e\n\u003cdiv id\u003d\u0027vega_2c269f03cb974775adb4f0bd42bcd063\u0027\u003e\u003c/div\u003e\n\n"
       },
       "dateCreated": "Feb 27, 2016 3:14:39 PM",
-      "dateStarted": "Feb 27, 2016 8:05:20 PM",
-      "dateFinished": "Feb 27, 2016 8:05:24 PM",
+      "dateStarted": "Feb 28, 2016 9:21:04 AM",
+      "dateFinished": "Feb 28, 2016 9:21:12 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%pyspark\n\n\nus10m \u003d \"https://vega.github.io/vega-tutorials/airports/data/us-10m.json\"\nflightsAirport \u003d \"https://vega.github.io/vega-tutorials/airports/data/flights-airport.csv\"\nairports \u003d \"https://vega.github.io/vega-tutorials/airports/data/airports.csv\"\n\ndata \u003d []\n\ndata.append({\n  \"format\": {\"feature\": \"states\", \"type\": \"topojson\"},\n  \"name\": \"states\",\n  \"transform\": [\n    {\n      \"projection\": \"albersUsa\",\n      \"scale\": 1200,\n      \"translate\": [450, 280],\n      \"type\": \"geopath\"\n    }\n  ],\n  \"url\": us10m\n})\n\ndata.append({\n  \"format\": {\"parse\": \"auto\", \"type\": \"csv\"},\n  \"name\": \"traffic\",\n  \"transform\": [\n    {\n      \"groupby\": [\"origin\"],\n      \"summarize\": [\n        {\n          \"as\": [\"flights\"],\n          \"field\": \"count\",\n          \"ops\": [\"sum\"]\n        }\n      ],\n      \"type\": \"aggregate\"\n    }\n  ],\n  \"url\": flightsAirport\n})\n\ndata.append({\n  \"format\": {\"parse\": \"auto\", \"type\": \"csv\"},\n  \"name\": \"airports\",\n  \"transform\": [\n    {\n      \"as\": [\"traffic\"],\n      \"keys\": [\"iata\"],\n      \"on\": \"traffic\",\n      \"onKey\": \"origin\",\n      \"type\": \"lookup\"\n    }, {\n      \"test\": \"datum.traffic !\u003d null\", \"type\": \"filter\"\n    }, {\n      \"lat\": \"latitude\",\n      \"lon\": \"longitude\",\n      \"projection\": \"albersUsa\",\n      \"scale\": 1200,\n      \"translate\": [450, 280],\n      \"type\": \"geo\"\n    }, {\n      \"test\": \"datum.layout_x !\u003d null \u0026\u0026 datum.layout_y !\u003d null\",\n      \"type\": \"filter\"\n    }, {\n      \"by\": \"-traffic.flights\", \"type\": \"sort\"\n    }, {\n      \"type\": \"voronoi\", \"x\": \"layout_x\", \"y\": \"layout_y\"\n    }\n  ],\n  \"url\": airports\n})\n\ndata.append({\n  \"format\": {\"parse\": \"auto\", \"type\": \"csv\"},\n  \"name\": \"routes\",\n  \"transform\": [\n    {\n      \"test\": \"hover \u0026\u0026 hover.iata \u003d\u003d datum.origin\",\n      \"type\": \"filter\"\n    }, {\n      \"as\": [\"_source\", \"_target\"],\n      \"keys\": [\"origin\", \"destination\"],\n      \"on\": \"airports\",\n      \"onKey\": \"iata\",\n      \"type\": \"lookup\"\n    }, {\n      \"test\": \"datum._source \u0026\u0026 datum._target\", \"type\": \"filter\"\n    }, {\n      \"type\": \"linkpath\"\n    }\n  ],\n  \"url\": flightsAirport\n})\n\nscales \u003d []\nscales.append({\n  \"domain\": {\"data\": \"traffic\", \"field\": \"flights\"},\n  \"name\": \"size\",\n  \"range\": [16, 1000],\n  \"type\": \"linear\"\n})\n\nmarks \u003d []\nmarks.append({\n  \"from\": {\"data\": \"states\"},\n  \"properties\": {\n    \"enter\": {\n      \"fill\": {\"value\": \"#dedede\"},\n      \"stroke\": {\"value\": \"white\"}\n    },\n    \"update\": {\n      \"path\": {\"field\": \"layout_path\"}\n    }\n  },\n  \"type\": \"path\"\n})\n\nmarks.append({\n  \"from\": {\"data\": \"airports\"},\n  \"properties\": {\n    \"enter\": {\n      \"fill\": {\"value\": \"steelblue\"},\n      \"fillOpacity\": {\"value\": 0.8},\n      \"size\": {\"field\": \"traffic.flights\", \"scale\": \"size\"},\n      \"stroke\": {\"value\": \"white\"},\n      \"strokeWidth\": {\"value\": 1.5}\n    },\n    \"update\": {\n      \"x\": {\"field\": \"layout_x\"},\n      \"y\": {\"field\": \"layout_y\"}\n    }\n  },\n  \"type\": \"symbol\"\n})\n\nmarks.append({\n  \"from\": {\"data\": \"airports\"},\n  \"name\": \"cell\",\n  \"properties\": {\n    \"enter\": {\n      \"fill\": {\"value\": \"transparent\"},\n      \"strokeWidth\": {\"value\": 0.35}\n    },\n    \"update\": {\n      \"path\": {\"field\": \"layout_path\"},\n      \"stroke\": {\"signal\": \"cell_stroke\"}\n    }\n  },\n  \"type\": \"path\"\n})\n\nmarks.append({\n  \"from\": {\"data\": \"routes\"},\n  \"interactive\": False,\n  \"properties\": {\n    \"enter\": {\n      \"path\": {\"field\": \"layout_path\"},\n      \"stroke\": {\"value\": \"black\"},\n      \"strokeOpacity\": {\"value\": 0.35}\n    }\n  },\n  \"type\": \"path\"\n})\n\n\nmarks.append({\n  \"interactive\": False,\n  \"properties\": {\n    \"enter\": {\n      \"align\": {\"value\": \"right\"},\n      \"fill\": {\"value\": \"black\"},\n      \"fontSize\": {\"value\": 20},\n      \"x\": {\"value\": 895},\n      \"y\": {\"value\": 0}\n    },\n    \"update\": {\n      \"text\": {\"signal\": \"title\"}\n    }\n  },\n  \"type\": \"text\"\n})\n\nsignals \u003d []\n\nsignals.append({\n  \"init\": None,\n  \"name\": \"hover\",\n  \"streams\": [\n    {\n      \"expr\": \"datum\", \"type\": \"@cell:mouseover\"\n    }, {\n      \"expr\": \"null\", \"type\": \"@cell:mouseout\"\n    }\n  ]\n})\n\n\nsignals.append({\n  \"init\": \"U.S. Airports, 2008\",\n  \"name\": \"title\",\n  \"streams\": [\n    {\n      \"expr\": \"hover ? hover.name + \u0027 (\u0027 + hover.iata + \u0027)\u0027 : \u0027U.S. Airports, 2008\u0027\",\n      \"type\": \"hover\"\n    }\n  ]\n})\n\n\nsignals.append({\n  \"init\": None,\n  \"name\": \"cell_stroke\",\n  \"streams\": [\n    {\n      \"expr\": \u0027cell_stroke ? null : \"brown\"\u0027,\n      \"type\": \"dblclick\"\n    }\n  ]\n})\n\nspec \u003d {\n  \"width\": 900,\n  \"height\": 560,\n  \"data\": data,\n  \"scales\": scales,\n  \"marks\": marks,\n  \"padding\": {\"bottom\": 0, \"left\": 0, \"right\": 0, \"top\": 25},\n  \"signals\": signals\n}\n\nshowVega(spec)\n\n",
       "authenticationInfo": {},
-      "dateUpdated": "Feb 27, 2016 8:06:53 PM",
+      "dateUpdated": "Feb 28, 2016 9:21:17 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -853,17 +857,158 @@
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\u003cscript\u003e\n    var spec \u003d {\"signals\": [{\"init\": null, \"streams\": [{\"expr\": \"datum\", \"type\": \"@cell:mouseover\"}, {\"expr\": \"null\", \"type\": \"@cell:mouseout\"}], \"name\": \"hover\"}, {\"init\": \"U.S. Airports, 2008\", \"streams\": [{\"expr\": \"hover ? hover.name + \u0027 (\u0027 + hover.iata + \u0027)\u0027 : \u0027U.S. Airports, 2008\u0027\", \"type\": \"hover\"}], \"name\": \"title\"}, {\"init\": null, \"streams\": [{\"expr\": \"cell_stroke ? null : \\\"brown\\\"\", \"type\": \"dblclick\"}], \"name\": \"cell_stroke\"}], \"scales\": [{\"range\": [16, 1000], \"domain\": {\"field\": \"flights\", \"data\": \"traffic\"}, \"type\": \"linear\", \"name\": \"size\"}], \"height\": 560, \"padding\": {\"top\": 25, \"left\": 0, \"right\": 0, \"bottom\": 0}, \"width\": 900, \"marks\": [{\"type\": \"path\", \"from\": {\"data\": \"states\"}, \"properties\": {\"update\": {\"path\": {\"field\": \"layout_path\"}}, \"enter\": {\"stroke\": {\"value\": \"white\"}, \"fill\": {\"value\": \"#dedede\"}}}}, {\"type\": \"symbol\", \"from\": {\"data\": \"airports\"}, \"properties\": {\"update\": {\"y\": {\"field\": \"layout_y\"}, \"x\": {\"field\": \"layout_x\"}}, \"enter\": {\"stroke\": {\"value\": \"white\"}, \"size\": {\"field\": \"traffic.flights\", \"scale\": \"size\"}, \"fillOpacity\": {\"value\": 0.8}, \"strokeWidth\": {\"value\": 1.5}, \"fill\": {\"value\": \"steelblue\"}}}}, {\"type\": \"path\", \"from\": {\"data\": \"airports\"}, \"name\": \"cell\", \"properties\": {\"update\": {\"path\": {\"field\": \"layout_path\"}, \"stroke\": {\"signal\": \"cell_stroke\"}}, \"enter\": {\"strokeWidth\": {\"value\": 0.35}, \"fill\": {\"value\": \"transparent\"}}}}, {\"type\": \"path\", \"from\": {\"data\": \"routes\"}, \"properties\": {\"enter\": {\"path\": {\"field\": \"layout_path\"}, \"stroke\": {\"value\": \"black\"}, \"strokeOpacity\": {\"value\": 0.35}}}, \"interactive\": false}, {\"type\": \"text\", \"properties\": {\"update\": {\"text\": {\"signal\": \"title\"}}, \"enter\": {\"y\": {\"value\": 0}, \"x\": {\"value\": 895}, \"align\": {\"value\": \"right\"}, \"fontSize\": {\"value\": 20}, \"fill\": {\"value\": \"black\"}}}, \"interactive\": false}], \"data\": [{\"url\": \"https://vega.github.io/vega-tutorials/airports/data/us-10m.json\", \"transform\": [{\"translate\": [450, 280], \"scale\": 1200, \"type\": \"geopath\", \"projection\": \"albersUsa\"}], \"name\": \"states\", \"format\": {\"type\": \"topojson\", \"feature\": \"states\"}}, {\"url\": \"https://vega.github.io/vega-tutorials/airports/data/flights-airport.csv\", \"transform\": [{\"summarize\": [{\"field\": \"count\", \"as\": [\"flights\"], \"ops\": [\"sum\"]}], \"type\": \"aggregate\", \"groupby\": [\"origin\"]}], \"name\": \"traffic\", \"format\": {\"parse\": \"auto\", \"type\": \"csv\"}}, {\"url\": \"https://vega.github.io/vega-tutorials/airports/data/airports.csv\", \"transform\": [{\"keys\": [\"iata\"], \"on\": \"traffic\", \"as\": [\"traffic\"], \"type\": \"lookup\", \"onKey\": \"origin\"}, {\"test\": \"datum.traffic !\u003d null\", \"type\": \"filter\"}, {\"scale\": 1200, \"projection\": \"albersUsa\", \"lon\": \"longitude\", \"lat\": \"latitude\", \"translate\": [450, 280], \"type\": \"geo\"}, {\"test\": \"datum.layout_x !\u003d null \u0026\u0026 datum.layout_y !\u003d null\", \"type\": \"filter\"}, {\"type\": \"sort\", \"by\": \"-traffic.flights\"}, {\"y\": \"layout_y\", \"x\": \"layout_x\", \"type\": \"voronoi\"}], \"name\": \"airports\", \"format\": {\"parse\": \"auto\", \"type\": \"csv\"}}, {\"url\": \"https://vega.github.io/vega-tutorials/airports/data/flights-airport.csv\", \"transform\": [{\"test\": \"hover \u0026\u0026 hover.iata \u003d\u003d datum.origin\", \"type\": \"filter\"}, {\"keys\": [\"origin\", \"destination\"], \"on\": \"airports\", \"as\": [\"_source\", \"_target\"], \"type\": \"lookup\", \"onKey\": \"iata\"}, {\"test\": \"datum._source \u0026\u0026 datum._target\", \"type\": \"filter\"}, {\"type\": \"linkpath\"}], \"name\": \"routes\", \"format\": {\"parse\": \"auto\", \"type\": \"csv\"}}]}\n    vg.parse.spec(spec, function(error, chart) { chart({el:\"#vega_e10f408929d24763849220059214dbf2\"}).update(); });\n\u003c/script\u003e\n\u003cdiv id\u003d\u0027vega_e10f408929d24763849220059214dbf2\u0027\u003e\u003c/div\u003e\n\n"
+        "msg": "\u003cscript\u003e\n  preprocessor \u003d function(spec, mode) {\n    return (mode \u003d\u003d \u0027vega\u0027) ? spec : vl.compile(vljson).spec\n  }\n  var spec \u003d preprocessor({\"signals\": [{\"init\": null, \"streams\": [{\"expr\": \"datum\", \"type\": \"@cell:mouseover\"}, {\"expr\": \"null\", \"type\": \"@cell:mouseout\"}], \"name\": \"hover\"}, {\"init\": \"U.S. Airports, 2008\", \"streams\": [{\"expr\": \"hover ? hover.name + \u0027 (\u0027 + hover.iata + \u0027)\u0027 : \u0027U.S. Airports, 2008\u0027\", \"type\": \"hover\"}], \"name\": \"title\"}, {\"init\": null, \"streams\": [{\"expr\": \"cell_stroke ? null : \\\"brown\\\"\", \"type\": \"dblclick\"}], \"name\": \"cell_stroke\"}], \"scales\": [{\"range\": [16, 1000], \"domain\": {\"field\": \"flights\", \"data\": \"traffic\"}, \"type\": \"linear\", \"name\": \"size\"}], \"height\": 560, \"padding\": {\"top\": 25, \"left\": 0, \"right\": 0, \"bottom\": 0}, \"width\": 900, \"marks\": [{\"type\": \"path\", \"from\": {\"data\": \"states\"}, \"properties\": {\"update\": {\"path\": {\"field\": \"layout_path\"}}, \"enter\": {\"stroke\": {\"value\": \"white\"}, \"fill\": {\"value\": \"#dedede\"}}}}, {\"type\": \"symbol\", \"from\": {\"data\": \"airports\"}, \"properties\": {\"update\": {\"y\": {\"field\": \"layout_y\"}, \"x\": {\"field\": \"layout_x\"}}, \"enter\": {\"stroke\": {\"value\": \"white\"}, \"size\": {\"field\": \"traffic.flights\", \"scale\": \"size\"}, \"fillOpacity\": {\"value\": 0.8}, \"strokeWidth\": {\"value\": 1.5}, \"fill\": {\"value\": \"steelblue\"}}}}, {\"type\": \"path\", \"from\": {\"data\": \"airports\"}, \"name\": \"cell\", \"properties\": {\"update\": {\"path\": {\"field\": \"layout_path\"}, \"stroke\": {\"signal\": \"cell_stroke\"}}, \"enter\": {\"strokeWidth\": {\"value\": 0.35}, \"fill\": {\"value\": \"transparent\"}}}}, {\"type\": \"path\", \"from\": {\"data\": \"routes\"}, \"properties\": {\"enter\": {\"path\": {\"field\": \"layout_path\"}, \"stroke\": {\"value\": \"black\"}, \"strokeOpacity\": {\"value\": 0.35}}}, \"interactive\": false}, {\"type\": \"text\", \"properties\": {\"update\": {\"text\": {\"signal\": \"title\"}}, \"enter\": {\"y\": {\"value\": 0}, \"x\": {\"value\": 895}, \"align\": {\"value\": \"right\"}, \"fontSize\": {\"value\": 20}, \"fill\": {\"value\": \"black\"}}}, \"interactive\": false}], \"data\": [{\"url\": \"https://vega.github.io/vega-tutorials/airports/data/us-10m.json\", \"transform\": [{\"translate\": [450, 280], \"scale\": 1200, \"type\": \"geopath\", \"projection\": \"albersUsa\"}], \"name\": \"states\", \"format\": {\"type\": \"topojson\", \"feature\": \"states\"}}, {\"url\": \"https://vega.github.io/vega-tutorials/airports/data/flights-airport.csv\", \"transform\": [{\"summarize\": [{\"field\": \"count\", \"as\": [\"flights\"], \"ops\": [\"sum\"]}], \"type\": \"aggregate\", \"groupby\": [\"origin\"]}], \"name\": \"traffic\", \"format\": {\"parse\": \"auto\", \"type\": \"csv\"}}, {\"url\": \"https://vega.github.io/vega-tutorials/airports/data/airports.csv\", \"transform\": [{\"keys\": [\"iata\"], \"on\": \"traffic\", \"as\": [\"traffic\"], \"type\": \"lookup\", \"onKey\": \"origin\"}, {\"test\": \"datum.traffic !\u003d null\", \"type\": \"filter\"}, {\"scale\": 1200, \"projection\": \"albersUsa\", \"lon\": \"longitude\", \"lat\": \"latitude\", \"translate\": [450, 280], \"type\": \"geo\"}, {\"test\": \"datum.layout_x !\u003d null \u0026\u0026 datum.layout_y !\u003d null\", \"type\": \"filter\"}, {\"type\": \"sort\", \"by\": \"-traffic.flights\"}, {\"y\": \"layout_y\", \"x\": \"layout_x\", \"type\": \"voronoi\"}], \"name\": \"airports\", \"format\": {\"parse\": \"auto\", \"type\": \"csv\"}}, {\"url\": \"https://vega.github.io/vega-tutorials/airports/data/flights-airport.csv\", \"transform\": [{\"test\": \"hover \u0026\u0026 hover.iata \u003d\u003d datum.origin\", \"type\": \"filter\"}, {\"keys\": [\"origin\", \"destination\"], \"on\": \"airports\", \"as\": [\"_source\", \"_target\"], \"type\": \"lookup\", \"onKey\": \"iata\"}, {\"test\": \"datum._source \u0026\u0026 datum._target\", \"type\": \"filter\"}, {\"type\": \"linkpath\"}], \"name\": \"routes\", \"format\": {\"parse\": \"auto\", \"type\": \"csv\"}}]} , \u0027vega\u0027);\n  vg.parse.spec(spec, function(error, chart) { chart({el:\"#vega_12629609d5c94be18c8e3854804ac06d\"}).update(); });\n\u003c/script\u003e\n\u003cdiv id\u003d\u0027vega_12629609d5c94be18c8e3854804ac06d\u0027\u003e\u003c/div\u003e\n\n"
       },
       "dateCreated": "Feb 27, 2016 7:18:26 PM",
-      "dateStarted": "Feb 27, 2016 8:06:53 PM",
-      "dateFinished": "Feb 27, 2016 8:07:00 PM",
+      "dateStarted": "Feb 28, 2016 9:21:17 AM",
+      "dateFinished": "Feb 28, 2016 9:21:25 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n\n## Below experiments are not working ",
-      "dateUpdated": "Feb 26, 2016 12:29:04 PM",
+      "text": "%md\n\n### 2.3.2 Vega Lite",
+      "authenticationInfo": {},
+      "dateUpdated": "Feb 28, 2016 10:43:28 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/markdown"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1456652578334_-405560853",
+      "id": "20160228-104258_1512785741",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch3\u003e2.3.2 Vega Lite\u003c/h3\u003e\n"
+      },
+      "dateCreated": "Feb 28, 2016 10:42:58 AM",
+      "dateStarted": "Feb 28, 2016 10:43:28 AM",
+      "dateFinished": "Feb 28, 2016 10:43:34 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\ndata \u003d {\n  \"values\": [\n    {\"a\": \"C\", \"b\": 2}, {\"a\": \"C\", \"b\": 7}, {\"a\": \"C\", \"b\": 4},\n    {\"a\": \"D\", \"b\": 1}, {\"a\": \"D\", \"b\": 2}, {\"a\": \"D\", \"b\": 6},\n    {\"a\": \"E\", \"b\": 8}, {\"a\": \"E\", \"b\": 4}, {\"a\": \"E\", \"b\": 7}\n  ]\n}\n\nencoding \u003d {\n  \"y\": {\"field\": \"a\", \"type\": \"nominal\"},\n  \"x\": {\n    \"aggregate\": \"average\", \"field\": \"b\", \"type\": \"quantitative\",\n    \"axis\": {\n      \"title\": \"Average of b\"\n    }\n  }\n}\n\nvlspec \u003d {\n  \"data\": data,\n  \"encoding\": encoding,\n  \"mark\": \"bar\"\n}\n\nshowVega(vlspec, \"vega-lite\")",
+      "authenticationInfo": {},
+      "dateUpdated": "Feb 28, 2016 10:37:09 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1456651877650_261026222",
+      "id": "20160228-103117_255383756",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cscript\u003e\n  preprocessor \u003d function(spec, mode) {\n    return (mode \u003d\u003d \u0027vega\u0027) ? spec : vl.compile(spec).spec\n  }\n  var spec \u003d preprocessor({\"mark\": \"bar\", \"data\": {\"values\": [{\"a\": \"C\", \"b\": 2}, {\"a\": \"C\", \"b\": 7}, {\"a\": \"C\", \"b\": 4}, {\"a\": \"D\", \"b\": 1}, {\"a\": \"D\", \"b\": 2}, {\"a\": \"D\", \"b\": 6}, {\"a\": \"E\", \"b\": 8}, {\"a\": \"E\", \"b\": 4}, {\"a\": \"E\", \"b\": 7}]}, \"encoding\": {\"y\": {\"field\": \"a\", \"type\": \"nominal\"}, \"x\": {\"aggregate\": \"average\", \"field\": \"b\", \"type\": \"quantitative\", \"axis\": {\"title\": \"Average of b\"}}}} , \u0027vega-lite\u0027);\n  vg.parse.spec(spec, function(error, chart) { chart({el:\"#vega_aed415ab3f774bdc98ca1ce688ecf14e\"}).update(); });\n\u003c/script\u003e\n\u003cdiv id\u003d\u0027vega_aed415ab3f774bdc98ca1ce688ecf14e\u0027\u003e\u003c/div\u003e\n\n"
+      },
+      "dateCreated": "Feb 28, 2016 10:31:17 AM",
+      "dateStarted": "Feb 28, 2016 10:37:09 AM",
+      "dateFinished": "Feb 28, 2016 10:37:13 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\nvalues \u003d iris.map(lambda r: {\"sepal-length\":r[0], \"sepal-width\":r[1], \"petal-length\":r[2], \"petal-width\":r[3], \"name\":r[4]})\n\n",
+      "authenticationInfo": {},
+      "dateUpdated": "Feb 28, 2016 11:08:45 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1456652453318_1376410518",
+      "id": "20160228-104053_349845975",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "[{\u0027sepal-length\u0027: 5.1, \u0027sepal-width\u0027: 3.5, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.4, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.9, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.4, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.7, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.3, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.6, \u0027sepal-width\u0027: 3.1, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.0, \u0027sepal-width\u0027: 3.6, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.4, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.4, \u0027sepal-width\u0027: 3.9, \u0027petal-width\u0027: 0.4, \u0027petal-length\u0027: 1.7, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.6, \u0027sepal-width\u0027: 3.4, \u0027petal-width\u0027: 0.3, \u0027petal-length\u0027: 1.4, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.0, \u0027sepal-width\u0027: 3.4, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.4, \u0027sepal-width\u0027: 2.9, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.4, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.9, \u0027sepal-width\u0027: 3.1, \u0027petal-width\u0027: 0.1, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.4, \u0027sepal-width\u0027: 3.7, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.8, \u0027sepal-width\u0027: 3.4, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.6, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.8, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 0.1, \u0027petal-length\u0027: 1.4, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.3, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 0.1, \u0027petal-length\u0027: 1.1, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.8, \u0027sepal-width\u0027: 4.0, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.2, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.7, \u0027sepal-width\u0027: 4.4, \u0027petal-width\u0027: 0.4, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.4, \u0027sepal-width\u0027: 3.9, \u0027petal-width\u0027: 0.4, \u0027petal-length\u0027: 1.3, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.1, \u0027sepal-width\u0027: 3.5, \u0027petal-width\u0027: 0.3, \u0027petal-length\u0027: 1.4, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.7, \u0027sepal-width\u0027: 3.8, \u0027petal-width\u0027: 0.3, \u0027petal-length\u0027: 1.7, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.1, \u0027sepal-width\u0027: 3.8, \u0027petal-width\u0027: 0.3, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.4, \u0027sepal-width\u0027: 3.4, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.7, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.1, \u0027sepal-width\u0027: 3.7, \u0027petal-width\u0027: 0.4, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.6, \u0027sepal-width\u0027: 3.6, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.0, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.1, \u0027sepal-width\u0027: 3.3, \u0027petal-width\u0027: 0.5, \u0027petal-length\u0027: 1.7, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.8, \u0027sepal-width\u0027: 3.4, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.9, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.0, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.6, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.0, \u0027sepal-width\u0027: 3.4, \u0027petal-width\u0027: 0.4, \u0027petal-length\u0027: 1.6, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.2, \u0027sepal-width\u0027: 3.5, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.2, \u0027sepal-width\u0027: 3.4, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.4, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.7, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.6, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.8, \u0027sepal-width\u0027: 3.1, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.6, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.4, \u0027sepal-width\u0027: 3.4, \u0027petal-width\u0027: 0.4, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.2, \u0027sepal-width\u0027: 4.1, \u0027petal-width\u0027: 0.1, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.5, \u0027sepal-width\u0027: 4.2, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.4, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.9, \u0027sepal-width\u0027: 3.1, \u0027petal-width\u0027: 0.1, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.0, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.2, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.5, \u0027sepal-width\u0027: 3.5, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.3, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.9, \u0027sepal-width\u0027: 3.1, \u0027petal-width\u0027: 0.1, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.4, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.3, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.1, \u0027sepal-width\u0027: 3.4, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.0, \u0027sepal-width\u0027: 3.5, \u0027petal-width\u0027: 0.3, \u0027petal-length\u0027: 1.3, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.5, \u0027sepal-width\u0027: 2.3, \u0027petal-width\u0027: 0.3, \u0027petal-length\u0027: 1.3, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.4, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.3, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.0, \u0027sepal-width\u0027: 3.5, \u0027petal-width\u0027: 0.6, \u0027petal-length\u0027: 1.6, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.1, \u0027sepal-width\u0027: 3.8, \u0027petal-width\u0027: 0.4, \u0027petal-length\u0027: 1.9, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.8, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 0.3, \u0027petal-length\u0027: 1.4, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.1, \u0027sepal-width\u0027: 3.8, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.6, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 4.6, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.4, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.3, \u0027sepal-width\u0027: 3.7, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.5, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 5.0, \u0027sepal-width\u0027: 3.3, \u0027petal-width\u0027: 0.2, \u0027petal-length\u0027: 1.4, \u0027name\u0027: u\u0027Iris-setosa\u0027}, {\u0027sepal-length\u0027: 7.0, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 1.4, \u0027petal-length\u0027: 4.7, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.4, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 1.5, \u0027petal-length\u0027: 4.5, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.9, \u0027sepal-width\u0027: 3.1, \u0027petal-width\u0027: 1.5, \u0027petal-length\u0027: 4.9, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.5, \u0027sepal-width\u0027: 2.3, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 4.0, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.5, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 1.5, \u0027petal-length\u0027: 4.6, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.7, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 4.5, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.3, \u0027sepal-width\u0027: 3.3, \u0027petal-width\u0027: 1.6, \u0027petal-length\u0027: 4.7, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 4.9, \u0027sepal-width\u0027: 2.4, \u0027petal-width\u0027: 1.0, \u0027petal-length\u0027: 3.3, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.6, \u0027sepal-width\u0027: 2.9, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 4.6, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.2, \u0027sepal-width\u0027: 2.7, \u0027petal-width\u0027: 1.4, \u0027petal-length\u0027: 3.9, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.0, \u0027sepal-width\u0027: 2.0, \u0027petal-width\u0027: 1.0, \u0027petal-length\u0027: 3.5, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.9, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.5, \u0027petal-length\u0027: 4.2, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.0, \u0027sepal-width\u0027: 2.2, \u0027petal-width\u0027: 1.0, \u0027petal-length\u0027: 4.0, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.1, \u0027sepal-width\u0027: 2.9, \u0027petal-width\u0027: 1.4, \u0027petal-length\u0027: 4.7, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.6, \u0027sepal-width\u0027: 2.9, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 3.6, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.7, \u0027sepal-width\u0027: 3.1, \u0027petal-width\u0027: 1.4, \u0027petal-length\u0027: 4.4, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.6, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.5, \u0027petal-length\u0027: 4.5, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.8, \u0027sepal-width\u0027: 2.7, \u0027petal-width\u0027: 1.0, \u0027petal-length\u0027: 4.1, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.2, \u0027sepal-width\u0027: 2.2, \u0027petal-width\u0027: 1.5, \u0027petal-length\u0027: 4.5, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.6, \u0027sepal-width\u0027: 2.5, \u0027petal-width\u0027: 1.1, \u0027petal-length\u0027: 3.9, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.9, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 1.8, \u0027petal-length\u0027: 4.8, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.1, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 4.0, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.3, \u0027sepal-width\u0027: 2.5, \u0027petal-width\u0027: 1.5, \u0027petal-length\u0027: 4.9, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.1, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 1.2, \u0027petal-length\u0027: 4.7, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.4, \u0027sepal-width\u0027: 2.9, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 4.3, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.6, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.4, \u0027petal-length\u0027: 4.4, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.8, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 1.4, \u0027petal-length\u0027: 4.8, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.7, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.7, \u0027petal-length\u0027: 5.0, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.0, \u0027sepal-width\u0027: 2.9, \u0027petal-width\u0027: 1.5, \u0027petal-length\u0027: 4.5, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.7, \u0027sepal-width\u0027: 2.6, \u0027petal-width\u0027: 1.0, \u0027petal-length\u0027: 3.5, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.5, \u0027sepal-width\u0027: 2.4, \u0027petal-width\u0027: 1.1, \u0027petal-length\u0027: 3.8, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.5, \u0027sepal-width\u0027: 2.4, \u0027petal-width\u0027: 1.0, \u0027petal-length\u0027: 3.7, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.8, \u0027sepal-width\u0027: 2.7, \u0027petal-width\u0027: 1.2, \u0027petal-length\u0027: 3.9, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.0, \u0027sepal-width\u0027: 2.7, \u0027petal-width\u0027: 1.6, \u0027petal-length\u0027: 5.1, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.4, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.5, \u0027petal-length\u0027: 4.5, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.0, \u0027sepal-width\u0027: 3.4, \u0027petal-width\u0027: 1.6, \u0027petal-length\u0027: 4.5, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.7, \u0027sepal-width\u0027: 3.1, \u0027petal-width\u0027: 1.5, \u0027petal-length\u0027: 4.7, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.3, \u0027sepal-width\u0027: 2.3, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 4.4, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.6, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 4.1, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.5, \u0027sepal-width\u0027: 2.5, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 4.0, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.5, \u0027sepal-width\u0027: 2.6, \u0027petal-width\u0027: 1.2, \u0027petal-length\u0027: 4.4, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.1, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.4, \u0027petal-length\u0027: 4.6, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.8, \u0027sepal-width\u0027: 2.6, \u0027petal-width\u0027: 1.2, \u0027petal-length\u0027: 4.0, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.0, \u0027sepal-width\u0027: 2.3, \u0027petal-width\u0027: 1.0, \u0027petal-length\u0027: 3.3, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.6, \u0027sepal-width\u0027: 2.7, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 4.2, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.7, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.2, \u0027petal-length\u0027: 4.2, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.7, \u0027sepal-width\u0027: 2.9, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 4.2, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.2, \u0027sepal-width\u0027: 2.9, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 4.3, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.1, \u0027sepal-width\u0027: 2.5, \u0027petal-width\u0027: 1.1, \u0027petal-length\u0027: 3.0, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 5.7, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 1.3, \u0027petal-length\u0027: 4.1, \u0027name\u0027: u\u0027Iris-versicolor\u0027}, {\u0027sepal-length\u0027: 6.3, \u0027sepal-width\u0027: 3.3, \u0027petal-width\u0027: 2.5, \u0027petal-length\u0027: 6.0, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 5.8, \u0027sepal-width\u0027: 2.7, \u0027petal-width\u0027: 1.9, \u0027petal-length\u0027: 5.1, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 7.1, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 2.1, \u0027petal-length\u0027: 5.9, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.3, \u0027sepal-width\u0027: 2.9, \u0027petal-width\u0027: 1.8, \u0027petal-length\u0027: 5.6, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.5, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 2.2, \u0027petal-length\u0027: 5.8, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 7.6, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 2.1, \u0027petal-length\u0027: 6.6, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 4.9, \u0027sepal-width\u0027: 2.5, \u0027petal-width\u0027: 1.7, \u0027petal-length\u0027: 4.5, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 7.3, \u0027sepal-width\u0027: 2.9, \u0027petal-width\u0027: 1.8, \u0027petal-length\u0027: 6.3, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.7, \u0027sepal-width\u0027: 2.5, \u0027petal-width\u0027: 1.8, \u0027petal-length\u0027: 5.8, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 7.2, \u0027sepal-width\u0027: 3.6, \u0027petal-width\u0027: 2.5, \u0027petal-length\u0027: 6.1, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.5, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 2.0, \u0027petal-length\u0027: 5.1, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.4, \u0027sepal-width\u0027: 2.7, \u0027petal-width\u0027: 1.9, \u0027petal-length\u0027: 5.3, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.8, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 2.1, \u0027petal-length\u0027: 5.5, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 5.7, \u0027sepal-width\u0027: 2.5, \u0027petal-width\u0027: 2.0, \u0027petal-length\u0027: 5.0, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 5.8, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 2.4, \u0027petal-length\u0027: 5.1, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.4, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 2.3, \u0027petal-length\u0027: 5.3, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.5, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.8, \u0027petal-length\u0027: 5.5, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 7.7, \u0027sepal-width\u0027: 3.8, \u0027petal-width\u0027: 2.2, \u0027petal-length\u0027: 6.7, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 7.7, \u0027sepal-width\u0027: 2.6, \u0027petal-width\u0027: 2.3, \u0027petal-length\u0027: 6.9, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.0, \u0027sepal-width\u0027: 2.2, \u0027petal-width\u0027: 1.5, \u0027petal-length\u0027: 5.0, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.9, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 2.3, \u0027petal-length\u0027: 5.7, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 5.6, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 2.0, \u0027petal-length\u0027: 4.9, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 7.7, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 2.0, \u0027petal-length\u0027: 6.7, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.3, \u0027sepal-width\u0027: 2.7, \u0027petal-width\u0027: 1.8, \u0027petal-length\u0027: 4.9, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.7, \u0027sepal-width\u0027: 3.3, \u0027petal-width\u0027: 2.1, \u0027petal-length\u0027: 5.7, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 7.2, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 1.8, \u0027petal-length\u0027: 6.0, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.2, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 1.8, \u0027petal-length\u0027: 4.8, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.1, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.8, \u0027petal-length\u0027: 4.9, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.4, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 2.1, \u0027petal-length\u0027: 5.6, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 7.2, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.6, \u0027petal-length\u0027: 5.8, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 7.4, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 1.9, \u0027petal-length\u0027: 6.1, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 7.9, \u0027sepal-width\u0027: 3.8, \u0027petal-width\u0027: 2.0, \u0027petal-length\u0027: 6.4, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.4, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 2.2, \u0027petal-length\u0027: 5.6, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.3, \u0027sepal-width\u0027: 2.8, \u0027petal-width\u0027: 1.5, \u0027petal-length\u0027: 5.1, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.1, \u0027sepal-width\u0027: 2.6, \u0027petal-width\u0027: 1.4, \u0027petal-length\u0027: 5.6, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 7.7, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 2.3, \u0027petal-length\u0027: 6.1, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.3, \u0027sepal-width\u0027: 3.4, \u0027petal-width\u0027: 2.4, \u0027petal-length\u0027: 5.6, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.4, \u0027sepal-width\u0027: 3.1, \u0027petal-width\u0027: 1.8, \u0027petal-length\u0027: 5.5, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.0, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.8, \u0027petal-length\u0027: 4.8, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.9, \u0027sepal-width\u0027: 3.1, \u0027petal-width\u0027: 2.1, \u0027petal-length\u0027: 5.4, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.7, \u0027sepal-width\u0027: 3.1, \u0027petal-width\u0027: 2.4, \u0027petal-length\u0027: 5.6, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.9, \u0027sepal-width\u0027: 3.1, \u0027petal-width\u0027: 2.3, \u0027petal-length\u0027: 5.1, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 5.8, \u0027sepal-width\u0027: 2.7, \u0027petal-width\u0027: 1.9, \u0027petal-length\u0027: 5.1, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.8, \u0027sepal-width\u0027: 3.2, \u0027petal-width\u0027: 2.3, \u0027petal-length\u0027: 5.9, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.7, \u0027sepal-width\u0027: 3.3, \u0027petal-width\u0027: 2.5, \u0027petal-length\u0027: 5.7, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.7, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 2.3, \u0027petal-length\u0027: 5.2, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.3, \u0027sepal-width\u0027: 2.5, \u0027petal-width\u0027: 1.9, \u0027petal-length\u0027: 5.0, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.5, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 2.0, \u0027petal-length\u0027: 5.2, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 6.2, \u0027sepal-width\u0027: 3.4, \u0027petal-width\u0027: 2.3, \u0027petal-length\u0027: 5.4, \u0027name\u0027: u\u0027Iris-virginica\u0027}, {\u0027sepal-length\u0027: 5.9, \u0027sepal-width\u0027: 3.0, \u0027petal-width\u0027: 1.8, \u0027petal-length\u0027: 5.1, \u0027name\u0027: u\u0027Iris-virginica\u0027}]\n"
+      },
+      "dateCreated": "Feb 28, 2016 10:40:53 AM",
+      "dateStarted": "Feb 28, 2016 11:04:33 AM",
+      "dateFinished": "Feb 28, 2016 11:04:36 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%pyspark\n\njsonSpec \u003d \u0027\u0027\u0027\n{\n  \"description\": \"The Trellis display by Becker et al. helped establish small multiples as a “powerful mechanism for understanding interactions in studies of how a response depends on explanatory variables”. Here we reproduce a trellis of Barley yields from the 1930s, complete with main-effects ordering to facilitate comparison.\",\n  \"data\": {\"url\": \"https://raw.githubusercontent.com/vega/polestar/master/src/data/barley.json\"},\n  \"mark\": \"point\",\n  \"encoding\": {\n    \"row\": {\"field\": \"site\", \"type\": \"ordinal\"},\n    \"x\": {\"aggregate\": \"mean\", \"field\": \"yield\", \"type\": \"quantitative\"},\n    \"y\": {\n      \"field\": \"variety\", \"type\": \"ordinal\",\n      \"sort\": {\"field\": \"yield\",\"op\": \"mean\"},\n      \"scale\": {\"bandSize\": 12}\n    },\n    \"color\": {\"field\": \"year\", \"type\": \"nominal\"}\n  }\n}\n\u0027\u0027\u0027\n\nshowVega(jsonSpec, \"vega-lite\")",
+      "authenticationInfo": {},
+      "dateUpdated": "Feb 28, 2016 11:07:37 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1456654050164_507342662",
+      "id": "20160228-110730_853186017",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cscript\u003e\n  preprocessor \u003d function(spec, mode) {\n    return (mode \u003d\u003d \u0027vega\u0027) ? spec : vl.compile(spec).spec\n  }\n  var spec \u003d preprocessor(\n{\n  \"description\": \"The Trellis display by Becker et al. helped establish small multiples as a “powerful mechanism for understanding interactions in studies of how a response depends on explanatory variables”. Here we reproduce a trellis of Barley yields from the 1930s, complete with main-effects ordering to facilitate comparison.\",\n  \"data\": {\"url\": \"https://raw.githubusercontent.com/vega/polestar/master/src/data/barley.json\"},\n  \"mark\": \"point\",\n  \"encoding\": {\n    \"row\": {\"field\": \"site\", \"type\": \"ordinal\"},\n    \"x\": {\"aggregate\": \"mean\", \"field\": \"yield\", \"type\": \"quantitative\"},\n    \"y\": {\n      \"field\": \"variety\", \"type\": \"ordinal\",\n      \"sort\": {\"field\": \"yield\",\"op\": \"mean\"},\n      \"scale\": {\"bandSize\": 12}\n    },\n    \"color\": {\"field\": \"year\", \"type\": \"nominal\"}\n  }\n}\n , \u0027vega-lite\u0027);\n  vg.parse.spec(spec, function(error, chart) { chart({el:\"#vega_1b42f9ba1ea84ebfa4126f7c7dddc87c\"}).update(); });\n\u003c/script\u003e\n\u003cdiv id\u003d\u0027vega_1b42f9ba1ea84ebfa4126f7c7dddc87c\u0027\u003e\u003c/div\u003e\n\n"
+      },
+      "dateCreated": "Feb 28, 2016 11:07:30 AM",
+      "dateStarted": "Feb 28, 2016 11:07:37 AM",
+      "dateFinished": "Feb 28, 2016 11:07:44 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n## Experiments below are not working ",
+      "authenticationInfo": {},
+      "dateUpdated": "Feb 28, 2016 10:51:08 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -876,7 +1021,8 @@
           "scatter": {}
         },
         "editorMode": "ace/mode/markdown",
-        "editorHide": true
+        "editorHide": false,
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -887,17 +1033,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\u003ch2\u003eBelow experiments are not working\u003c/h2\u003e\n"
+        "msg": "\u003ch2\u003eExperiments below are not working\u003c/h2\u003e\n"
       },
       "dateCreated": "Feb 26, 2016 12:24:14 PM",
-      "dateStarted": "Feb 26, 2016 12:29:01 PM",
-      "dateFinished": "Feb 26, 2016 12:29:02 PM",
+      "dateStarted": "Feb 28, 2016 10:51:08 AM",
+      "dateFinished": "Feb 28, 2016 10:51:17 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n\n### Note: Seaborn currently not working",
-      "dateUpdated": "Feb 26, 2016 12:15:03 PM",
+      "text": "%md\n\n### Note: Seaborn (still not working)",
+      "authenticationInfo": {},
+      "dateUpdated": "Feb 28, 2016 10:51:53 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -910,7 +1057,8 @@
           "scatter": {}
         },
         "editorMode": "ace/mode/markdown",
-        "editorHide": true
+        "editorHide": true,
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -921,11 +1069,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\u003ch3\u003eNote: Seaborn currently not working\u003c/h3\u003e\n"
+        "msg": "\u003ch3\u003eNote: Seaborn (still not working)\u003c/h3\u003e\n"
       },
       "dateCreated": "Feb 26, 2016 12:14:33 PM",
-      "dateStarted": "Feb 26, 2016 12:14:59 PM",
-      "dateFinished": "Feb 26, 2016 12:15:00 PM",
+      "dateStarted": "Feb 28, 2016 10:51:44 AM",
+      "dateFinished": "Feb 28, 2016 10:51:48 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
