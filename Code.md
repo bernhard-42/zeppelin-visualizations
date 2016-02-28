@@ -1,11 +1,4 @@
 
-```python
-%pyspark
-
-print sc.version
-```
-
-
 ## Table of Contents
 
 ### 1 Pretty print RDDs and DataFrames as with %sql Interpreter
@@ -18,6 +11,13 @@ print sc.version
 #### 2.2 Integration of Vega via HTML and Javascript
 #### 2.3 Integratíon of MatplotLib via HTML and SVG
 
+
+
+```python
+%pyspark
+
+print sc.version
+```
 
 
 ## 1 Pretty print RDDs and DataFrames as with %sql Interpreter
