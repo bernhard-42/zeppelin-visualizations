@@ -13,13 +13,6 @@
 
 
 
-```python
-%pyspark
-
-print sc.version
-```
-
-
 ## 1 Pretty print RDDs and DataFrames as with %sql Interpreter
 
 ### 1.1 A little convenience function 
@@ -164,8 +157,7 @@ showBokeh(p)
 import bokeh
 
 print "Note: Uncomment the download once if you have never accessed bokeh.sampledata!"
-
-# bokeh.sampledata.download(False)  # progress doesn't work with Zeppelin
+bokeh.sampledata.download(False)  # progress doesn't work with Zeppelin
 ```
 
 
@@ -611,6 +603,7 @@ showVega(spec)
 
 ```python
 %pyspark
+from pyspark.sql.functions import lit
 
 irisDF = sqlContext.createDataFrame(iris, ["sepal-length", "sepal-width", "petal-length", "petal-width", "species", "name"])
 
