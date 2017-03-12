@@ -41,14 +41,6 @@ versionCheck()
 ```
 
 
-_Result:_
-
-```
-Python: 3.5.2 |Anaconda 4.3.0 (x86_64)| (default, Jul  2 2016, 17:52:12)  - [GCC 4.2.1 Compatible Apple LLVM 4.2 (clang-425.0.28)]
-Spark:  2.1.0
-
-```
-
 ---
 
 #### Initialize ZeppelinSession ...
@@ -103,14 +95,6 @@ nv = Nvd3()
 ```
 
 
-_Result:_
-
-```
-<script src="http://cdn.rawgit.com/exupero/saveSvgAsPng/gh-pages/saveSvgAsPng.js" type="text/javascript"></script>
-<div>Downloaded http://cdn.rawgit.com/exupero/saveSvgAsPng/gh-pages/saveSvgAsPng.js to allow saving charts to PNG</div>
-
-```
-
 ---
 
 
@@ -162,7 +146,7 @@ _Input:_
 
 ```python
 %pyspark
-spl.saveAsPng("scatter-2")
+spl.saveAsPng("scatter")
 ```
 
 
@@ -213,18 +197,6 @@ df.head()
 ```
 
 
-_Result:_
-
-```
-            Date  Price   Quantity
-0  1136005200000  71.89  1271000.0
-1  1138683600000  75.51  1271000.0
-2  1141102800000  68.49  1271000.0
-3  1143781200000  62.72        0.0
-4  1146369600000  70.39        0.0
-
-```
-
 ---
 
 
@@ -256,7 +228,7 @@ _Input:_
 import time
 
 for i in range(50, 77, 5):
-    lpb.saveAsPng("bar-line-%02d" % i)
+    lpb.append(lpb.convert(df.iloc[i:i+5,:], "Date", line="Price", bar="Quantity"))
     time.sleep(0.1)
 ```
 
@@ -346,6 +318,7 @@ _Input:_
 
 ```python
 %pyspark
+#!zeppelin2md:images/bokeh-1.gif
 
 opts = dict(plot_width=250, plot_height=250, min_border=0)
 p1 = figure(**opts)
@@ -357,6 +330,10 @@ r2 = p2.circle([1,2,3], [4,5,6], size=20)
 handle1 = show(row(p1, p2), notebook_handle=True)
 ```
 
+
+_Result:_
+
+![images/bokeh-1.gif](images/bokeh-1.gif)
 
 ---
 
