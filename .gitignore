@@ -2,3 +2,6 @@
 *.pyc
 __pycache__image-src
 notebooks/image-src
+TODO
+zeppelin_viz/test.py
+TODO.txt

@@ -17,14 +17,12 @@ from .nvd3_functions import Nvd3Functions
 class Nvd3Chart(object):
     _plotId = 0
 
-    def __init__(self, nvd3Functions, funcName, height=400, width=1024):
-        self.funcName = funcName
-        self.height = height
-        self.width = width
-
+    def __init__(self, nvd3Functions):
         self.id = 0
         self.data = None
         self.nvd3Functions = nvd3Functions
+        self.width = 1024
+        self.height = 400
         
 
     def _divId(self):
@@ -34,9 +32,18 @@ class Nvd3Chart(object):
     def _send(self, event, delay, data):
         self.nvd3Functions.send(self.funcName, event, data, "%s" % self._divId(), delay)
 
+
     def plot(self, data):
         Nvd3Chart._plotId = Nvd3Chart._plotId + 1
         
+        if config.get("width"):
+            self.width = config.get("width")
+        if config.get("height"):
+            if config.get("halfPie"):
+                self.height = int(config.get("height") / 2)
+            else:
+                self.height = config.get("height")
+                
         print("%html")
         print("""
         <div id="%s"  class='with-3d-shadow with-transitions' style="height:%dpx; width:%dpx">
@@ -108,4 +115,3 @@ class Nvd3Chart(object):
         if filename is None:
             filename = self._divId
         self._send("saveAsPng", 0, {"filename":filename})
-

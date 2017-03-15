@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name = "zeppelin_viz",
-    version = "0.1.0",
+    version = "0.2.0",
     author = "Bernhard Walter",
     author_email = "bwalter@gmail.com",
     description = ("Some python visualization libraries (Bokeh, VegaLite, Nvd3) with enablers for Apache Zeppelin"),

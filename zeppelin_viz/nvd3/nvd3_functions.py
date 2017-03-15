@@ -16,9 +16,10 @@ from zeppelin_session import ZeppelinSession
 
 
 class Nvd3Functions(object):
+    
     makeChart = """
         
-makeChart = function(session, object, plotFunction) {
+makeChart = function(session, object, chartFunction) {
     var cacheId = "__nv__chart_cache_" + object.plotId;
     
     nv.utils.windowResize = function(chart) { console.info("windowResize not supported") } // avoid d3 translate(Nan,5) errors
@@ -27,13 +28,39 @@ makeChart = function(session, object, plotFunction) {
     if (object.event == "plot") {
         console.log("plot " + object.plotId)
 
-        var data = JSON.parse(JSON.stringify(object.data));  // clone data
+        var spec = JSON.parse(JSON.stringify(object.data));  // clone data
+        var data = spec.data;
+        var config = spec.config;
 
         var divId = "#" + object.plotId + " svg";
         session[cacheId] = {"data": data};
 
-        plotFunction(session, divId, data, session[cacheId])
-        
+        nv.addGraph(function() {
+            try {
+                chart = chartFunction();     // returns the user defined chart
+            } catch(err) {
+                console.error(err.message);
+            }
+            
+            for (c in config) {
+                if (c === "halfPie" && config[c]) {
+                    chart.pie.startAngle(function(d) { return d.startAngle/2 - Math.PI/2 })
+                             .endAngle(function(d)   { return d.endAngle/2   - Math.PI/2 });
+                } else {
+                    chart[c](config[c]);
+                }
+            }
+            
+            chartData = d3.select(divId).datum(data);
+            chartData.transition().duration(500).call(chart);
+            
+            session[cacheId].chart = chart;
+            session[cacheId].chartData = chartData;
+
+            return chart;
+        })
+
+                           
     } else if (object.event == "saveAsPng") {
         console.log("Save " + object.plotId + " as PNG")
         

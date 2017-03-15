@@ -16,42 +16,33 @@ from ..nvd3_chart import Nvd3Chart
 from ..nvd3_data import Nvd3Data
 
 
-class ScatterPlusLineChart(Nvd3Chart):
+class MultiBarHorizontalChart(Nvd3Chart):
+    valueAttributes = []
+    
     
     def __init__(self, nvd3Functions):
         super(self.__class__, self).__init__(nvd3Functions)
-        self.funcName = "scatterPlusLineChart"
+        self.funcName = "multiBarHorizontalChart"
         self.funcBody = """
             function(session, object) {
                 session.__functions.makeChart(session, object, function() {
 
-                    var chart = nv.models.scatterChart()
-                                  .showDistX(true)
-                                  .showDistY(true)
-                                  .color(d3.scale.category10().range());
-                  
-                    //Axis settings
-                    chart.xAxis.tickFormat(d3.format('.02f'));
-                    chart.yAxis.tickFormat(d3.format('.02f'));
-                  
-                    //We want to show shapes other than circles.
-                    chart.scatter.onlyCircles = false;
-
+                    var chart = nv.models.multiBarHorizontalChart()
+                        .margin({left: 100})
+                        .stacked(true);
+                        
+                    chart.yAxis.tickFormat(d3.format(',.2f'));
+                    chart.yAxis.axisLabel('Y Axis');
+                    chart.xAxis.axisLabel('X Axis').axisLabelDistance(20);
+                      
                     return chart;
                 })
             }        
         """
 
-
-    def convert(self, df, key, value, shape=None, size=None, config={}):
+    def convert(self, df, group, series, config={}):
         nvd3data = Nvd3Data()
-        valuesConfig, chartConfig = nvd3data.splitConfig(config, len(df), [])
+        valuesConfig, chartConfig = nvd3data.splitConfig(config, len(series), self.valueAttributes)
 
-        if size is None:
-            size = [None] * len(df)
-
-        if shape is None:
-            shape = [None] * len(df)
-
-        data = [nvd3data.convert(df[i], key[i], value[i], size[i], shape[i], config=valuesConfig[i]) for i in range(len(df))]
+        data = [nvd3data.convert(df, group, series[i], config=valuesConfig[i]) for i in range(len(series))]
         return {"data": data, "config": chartConfig} 
