@@ -51,8 +51,8 @@ class Nvd3(object):
         """ % (version, version))
 
 
-    def register(self, funcName, funcBody):
-        if not self.registeredCharts.get(funcName):
+    def register(self, funcName, funcBody, force=False):
+        if not self.registeredCharts.get(funcName) or force:
             self.nvd3Functions.register(funcName, "%s = %s" % (funcName, funcBody))
             self.registeredCharts[funcName] = True
 
