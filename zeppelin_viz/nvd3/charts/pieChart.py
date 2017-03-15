@@ -17,7 +17,8 @@ from ..nvd3_data import Nvd3Data
 
 
 class PieChart(Nvd3Chart):
-    
+    valueAttributes = []
+
     def __init__(self, nvd3Functions):
         super(self.__class__, self).__init__(nvd3Functions)
         self.funcName = "pieChart"
@@ -38,7 +39,7 @@ class PieChart(Nvd3Chart):
     def convert(self, df, group, series, config={}):
         nvd3data = Nvd3Data()
         series = [series]
-        valuesConfig, chartConfig = nvd3data.splitConfig(config, df.shape[0], [])
+        valuesConfig, chartConfig = nvd3data.splitConfig(config, df.shape[0], self.valueAttributes)
 
         data = [nvd3data.convert(df, group, series[i], config=valuesConfig[i])["values"] for i in range(len(series))]
         return {"data": data[0], "config": chartConfig} 

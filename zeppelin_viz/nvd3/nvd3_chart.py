@@ -33,9 +33,12 @@ class Nvd3Chart(object):
         self.nvd3Functions.send(self.funcName, event, data, "%s" % self._divId(), delay)
 
 
-    def plot(self, data):
+    def plot(self, dataConfig):
         Nvd3Chart._plotId = Nvd3Chart._plotId + 1
         
+        config = dataConfig["config"]
+        data = dataConfig["data"]
+
         if config.get("width"):
             self.width = config.get("width")
         if config.get("height"):
@@ -52,15 +55,17 @@ class Nvd3Chart(object):
         """ % (self._divId(), self.height, self.width))
         
         self.data = data
-        self._send("plot", 200, data)
+        self._send("plot", 200, dataConfig)
 
 
-    def replace(self, data):
+    def replace(self, dataConfig):
+        data = dataConfig["data"]
         self.data = data
         self._send("replace", 0, data)
     
         
-    def append(self, newData):                              # needs to do the same as the javascript part
+    def append(self, dataConfig):                              # needs to do the same as the javascript part
+        newData = dataConfig["data"]
 
         def _appendData(data, newData):
             data["values"] = data["values"] + newData["values"]
@@ -77,8 +82,9 @@ class Nvd3Chart(object):
         self._send("append", 0, newData)
     
             
-    def update(self, rowIndices, changedData):              # needs to do the same as the javascript part
-
+    def update(self, rowIndices, dataConfig):              # needs to do the same as the javascript part
+        changedData = dataConfig["data"]
+        
         def _updateData(data, rowIndices, changedData):
             for i in range(len(rowIndices)):
                 data["values"][rowIndices[i]] = changedData["values"][i]
