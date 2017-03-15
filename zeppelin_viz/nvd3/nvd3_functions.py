@@ -22,6 +22,8 @@ class Nvd3Functions(object):
 makeChart = function(session, object, chartFunction) {
     var cacheId = "__nv__chart_cache_" + object.plotId;
     
+    d3.selectAll('.nvtooltip').style('opacity', '0');  // remove all "zombie" tooltips
+
     nv.utils.windowResize = function(chart) { console.info("windowResize not supported") } // avoid d3 translate(Nan,5) errors
     var duration = 350;
 
