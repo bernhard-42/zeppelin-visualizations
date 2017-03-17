@@ -14,6 +14,7 @@
 
 from ..nvd3_chart import Nvd3Chart
 from ..nvd3_data import Nvd3Data
+import pandas as pd
 
 
 class DiscreteBarChart(Nvd3Chart):
@@ -27,14 +28,16 @@ class DiscreteBarChart(Nvd3Chart):
                 var chart = nv.models.discreteBarChart()
                     .staggerLabels(true)
                     .showValues(true)
-                    .showLegend(true)
+                    .showLegend(false)
                     .margin({top:30})
 
                 session.__functions.makeChart(session, object, chart);
             }        
         """
 
-    def convert(self, df, group, series, config={}):
+    def convert(self, data, group, series, config={}):
+        df = data if isinstance(data, pd.DataFrame) else pd.DataFrame(data)
+        
         nvd3data = Nvd3Data()
         valuesConfig, chartConfig = nvd3data.splitConfig(config, df.shape[0], self.valueAttributes)
         valuesConfig = valuesConfig[0]

@@ -14,6 +14,7 @@
 
 from ..nvd3_chart import Nvd3Chart
 from ..nvd3_data import Nvd3Data
+import pandas as pd
 
 
 class LinePlusBarChart(Nvd3Chart):
@@ -40,12 +41,14 @@ class LinePlusBarChart(Nvd3Chart):
                 chart.y2Axis.showMaxMin(false)
                            .tickFormat(d3.format(',.1f'))
                 
-                session.__functions.makeChart(session, object, chart);
+               session.__functions.makeChart(session, object, chart);
             }
         """
  
 
-    def convert(self, df, key, lineCol, barCol, config={}):
+    def convert(self, data, key, lineCol, barCol, config={}):
+        df = data if isinstance(data, pd.DataFrame) else pd.DataFrame(data)
+        
         nvd3data = Nvd3Data()
         columns =       [barCol, lineCol] # same order
         config["bar"] = [True,   False]   # same order

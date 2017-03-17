@@ -41,7 +41,10 @@ makeChart = function(session, object, chart) {
 
     var configure = function(chartModel, config) {
         for (c in config) {
-            if ((typeof(config[c]) === "object") && ! Array.isArray(config[c])) {       // sub config, 1 level
+            if (c == "margin") {
+                chart[c](config[c]);                
+            } else if ((typeof(config[c]) === "object") && ! Array.isArray(config[c])) {       // sub config, 1 level
+
                 for (c2 in config[c]) {
                     if (c2 == "tickFormat") {
                         format = config[c][c2];

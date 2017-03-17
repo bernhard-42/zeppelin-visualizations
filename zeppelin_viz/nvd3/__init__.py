@@ -33,8 +33,6 @@ class Nvd3(object):
     
     def __init__(self, downloadAsPng=True):
         self.nvd3Functions = Nvd3Functions()
-        self.LPB = LinePlusBarChart
-        self.SPL = ScatterPlusLineChart
         self.registeredCharts = {}
 
         if downloadAsPng:

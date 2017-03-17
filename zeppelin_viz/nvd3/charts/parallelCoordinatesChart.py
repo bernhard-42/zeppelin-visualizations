@@ -14,6 +14,7 @@
 
 from zeppelin_viz.nvd3.nvd3_chart import Nvd3Chart
 from zeppelin_viz.nvd3.nvd3_data import Nvd3Data
+import pandas as pd
 
 
 class ParallelCoordinatesChart(Nvd3Chart):
@@ -39,7 +40,9 @@ class ParallelCoordinatesChart(Nvd3Chart):
             }
         """
 
-    def convert(self, df, group, series, dimFormat=None, dimTooltip=None, color=None, strokeWidth=None, config={}):
+    def convert(self, data, group, series, dimFormat=None, dimTooltip=None, color=None, strokeWidth=None, config={}):
+        df = data if isinstance(data, pd.DataFrame) else pd.DataFrame(data)
+         
         nvd3data = Nvd3Data()
 
         if color is not None:

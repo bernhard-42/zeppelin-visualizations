@@ -14,6 +14,7 @@
 
 from ..nvd3_chart import Nvd3Chart
 from ..nvd3_data import Nvd3Data
+import pandas as pd
 
 
 class SunBurstChart(Nvd3Chart):

@@ -14,6 +14,7 @@
 
 from ..nvd3_chart import Nvd3Chart
 from ..nvd3_data import Nvd3Data
+import pandas as pd
 
 
 class BoxPlotChart(Nvd3Chart):
@@ -32,7 +33,26 @@ class BoxPlotChart(Nvd3Chart):
             }      
         """
 
-    def convert(self, df, boxStyle="iqr", config={}):
+    # Input Data: 
+    # data:
+    #    Dict of lists
+    #      {'A': (1, 2, 3, 4, 5, 6),
+    #       'B': (11, 12, 13, 14, 15, 16),
+    #       'C': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6],
+    #       'D': ('C', 'T', 'D', 'S', 'U', 'D')}
+    #
+    #     OR pandas DataFrame
+    #         A   B    C  D
+    #      0  1  11  0.1  C
+    #      1  2  12  0.2  T
+    #      2  3  13  0.3  D
+    #      3  4  14  0.4  S
+    #      4  5  15  0.5  U
+    #      5  6  16  0.6  D
+
+    def convert(self, data, boxStyle="iqr", config={}):
+        df = data if isinstance(data, pd.DataFrame) else pd.DataFrame(data)
+            
         nvd3data = Nvd3Data()
 
         valuesConfig, chartConfig = nvd3data.splitConfig(config, df.shape[1], self.valueAttributes)

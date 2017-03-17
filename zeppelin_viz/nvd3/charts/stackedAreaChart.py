@@ -14,6 +14,7 @@
 
 from ..nvd3_chart import Nvd3Chart
 from ..nvd3_data import Nvd3Data
+import pandas as pd
 
 
 class StackedAreaChart(Nvd3Chart):
@@ -38,7 +39,9 @@ class StackedAreaChart(Nvd3Chart):
             }        
         """
 
-    def convert(self, df, group, series, config={}):
+    def convert(self, data, group, series, config={}):
+        df = data if isinstance(data, pd.DataFrame) else pd.DataFrame(data)
+        
         nvd3data = Nvd3Data()
         valuesConfig, chartConfig = nvd3data.splitConfig(config, len(series), self.valueAttributes)
 

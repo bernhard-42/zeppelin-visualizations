@@ -14,6 +14,7 @@
 
 from ..nvd3_chart import Nvd3Chart
 from ..nvd3_data import Nvd3Data
+import pandas as pd
 
 
 class ScatterPlusLineChart(Nvd3Chart):
@@ -42,7 +43,16 @@ class ScatterPlusLineChart(Nvd3Chart):
         """
 
 
-    def convert(self, df, key, value, shape=None, size=None, config={}):
+    def convert(self, data, key, value, shape=None, size=None, config={}):
+        if (isinstance(data, (list, tuple))):
+            df = [d if isinstance(d, pd.DataFrame) else pd.DataFrame(d) for d in data]
+        else:
+            df = [data] if isinstance(data, pd.DataFrame) else [pd.DataFrame(data)]
+            key = [key]
+            value = [value]
+            shape = [shape]
+            size = [size]
+            
         nvd3data = Nvd3Data()
         valuesConfig, chartConfig = nvd3data.splitConfig(config, len(df), self.valueAttributes)
 
