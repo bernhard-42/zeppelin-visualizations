@@ -42,3 +42,12 @@ class DiscreteBarChart(Nvd3Chart):
         data = [nvd3data.convert(df, group, series, config=valuesConfig)]
 
         return {"data": data, "config": chartConfig} 
+
+    def append(self, dataConfig, chart=0):
+        print("Not supported")
+
+    def update(self, rowIndices, dataConfig, chart=0):
+        print("Not supported")
+
+    def delete(self, rowIndices, chart=0):
+        print("Not supported")

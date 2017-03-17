@@ -62,4 +62,12 @@ class BoxPlotChart(Nvd3Chart):
 
 
         return {"data":data, "config":chartConfig}
+    
+    def append(self, dataConfig, chart=0):
+        print("Not supported")
 
+    def update(self, rowIndices, dataConfig, chart=0):
+        print("Not supported")
+
+    def delete(self, rowIndices, chart=0):
+        print("Not supported")

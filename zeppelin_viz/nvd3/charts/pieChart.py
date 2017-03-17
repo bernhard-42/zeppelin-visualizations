@@ -24,7 +24,6 @@ class PieChart(Nvd3Chart):
         self.funcName = "pieChart"
         self.funcBody = """
             function(session, object) {
-
                 var chart = nv.models.pieChart()
                     .showLabels(true)
                     .growOnHover(true)

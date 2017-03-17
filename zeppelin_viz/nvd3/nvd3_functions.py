@@ -27,6 +27,18 @@ makeChart = function(session, object, chart) {
     nv.utils.windowResize = function(chart) { console.info("windowResize not supported") } // avoid d3 translate(Nan,5) errors
     var duration = 350;
 
+
+    var identifyData = function(data) {
+        if ((typeof(data[0].values) != "undefined") && (typeof(data[0].key) != "undefined")) {
+            return "kv"
+        } else if ((typeof(data[0].x) != "undefined") && (typeof(data[0].y) != "undefined")) {
+            return "xy"
+        } else {
+            console.error('Unknown data type')
+        }
+    }
+
+
     var configure = function(chartModel, config) {
         for (c in config) {
             if ((typeof(config[c]) === "object") && ! Array.isArray(config[c])) {       // sub config, 1 level
@@ -53,6 +65,7 @@ makeChart = function(session, object, chart) {
         }
         return chart;
     }
+
     
     if (object.event == "plot") {
         console.log("plot " + object.plotId)
@@ -102,22 +115,32 @@ makeChart = function(session, object, chart) {
         var newData = JSON.parse(JSON.stringify(object.data));  // clone data
 
         var data = session[cacheId].data;
-        
-        var _append = function(dold, dnew) {
-            dold.values = dold.values.concat(dnew.values);
-            for (attr in dnew) {
-                if (attr !== "key" && attr !== "values") {
-                    dold[attr] = dnew[attr];
+
+        var _append = function(dataType, dold, dnew) {
+            if (dataType == "kv") {
+                dold.values = dold.values.concat(dnew.values);
+                for (attr in dnew) {
+                    if (attr !== "key" && attr !== "values") {
+                        dold[attr] = dnew[attr];
+                    }
                 }
+            } else {
+                dold = dold.concat(dnew);
             }
+            return dold
         }
         
-        if (data instanceof Array && newData instanceof Array) {
-            for (i in data) { _append(data[i], newData[i]) }
+        var dataType = identifyData(data);
+        if (dataType == "kv") {
+            for (i in data) {
+                data[i] = _append("kv", data[i], newData[i])
+            }
+        } else if (dataType == "xy") {
+            data = _append(dataType, data, newData)
         } else {
-            _append(data, newData)
+            console.error("Unknown data type");
         }
-        
+
         var chart = session[cacheId].chart;
         var chartData = session[cacheId].chartData;
         console.log("append: " + chart.container.parentNode.id)

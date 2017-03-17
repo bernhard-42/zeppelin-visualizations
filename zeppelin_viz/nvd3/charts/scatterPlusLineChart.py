@@ -18,7 +18,7 @@ from ..nvd3_data import Nvd3Data
 
 class ScatterPlusLineChart(Nvd3Chart):
     valueAttributes = ["slope", "intercept"]
-
+    
     def __init__(self, nvd3Functions):
         super(self.__class__, self).__init__(nvd3Functions)
         self.funcName = "scatterPlusLineChart"

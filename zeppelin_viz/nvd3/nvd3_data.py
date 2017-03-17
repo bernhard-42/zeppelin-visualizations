@@ -72,9 +72,9 @@ class Nvd3Data(object):
             else:
                 if k == "color":
                     if seriesLen > 0:
-                        chartConfig[k] = v[0:seriesLen]
+                        chartConfig[k] = v # v[0:seriesLen]
                     else:
-                        chartConfig[k] = v[0:1]
+                        chartConfig[k] = v # v[0:1]
                 else:
                     chartConfig[k] = v
 
@@ -90,3 +90,4 @@ class Nvd3Data(object):
                 valuesConfig = res
 
         return (valuesConfig, chartConfig)
+        

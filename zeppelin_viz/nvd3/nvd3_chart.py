@@ -19,71 +19,121 @@ class Nvd3Chart(object):
 
     def __init__(self, nvd3Functions):
         self.id = 0
-        self.data = None
+        self.data = []
+        self.divIds = []
         self.nvd3Functions = nvd3Functions
         self.width = 1024
         self.height = 400
-        
+        self.delay = 200
 
     def _divId(self):
         return "%s-%03d" % (self.funcName, Nvd3Chart._plotId) 
         
 
-    def _send(self, event, delay, data):
-        self.nvd3Functions.send(self.funcName, event, data, "%s" % self._divId(), delay)
+    def _send(self, event, delay, divId, data):
+        self.nvd3Functions.send(self.funcName, event, data, divId, delay)
+
+
+    def _identifyData(self, data):
+        if data[0].get("values") and data[0].get("key"):
+            return "kv"
+        elif data[0].get("y") and data[0].get("x"):
+            return "xy"
+        else:
+            raise(ValueError('Unknown data type'))
+
+
+    def _plot(self, dataConfigs):
+
+        # Define widths and heights
+
+        _height = 0
+        _widths = [] 
+        _data = []
+        _divIds = []
+
+        for dataConfig in dataConfigs:
+            Nvd3Chart._plotId = Nvd3Chart._plotId + 1
+            self.divIds.append(self._divId())
+            
+            config = dataConfig["config"]
+            if config.get("width"):
+                _widths.append(config.get("width"))
+            else:
+                _widths.append(self.width)
+    
+            if config.get("height"):
+                _height = max(_height, config.get("height"))
+
+        if _height > 0:
+            self.height = _height
+
+        self.width = sum(_widths)
+        
+        # Print the divs as float:left
+        
+        print("%html")
+        print("""<div style="height:%dpx; width:%dpx">""" %  (self.height, self.width))
+        
+        for dataConfig, divId, width in zip(dataConfigs, self.divIds, _widths):
+            print("""
+            <div id="%s" class="with-3d-shadow with-transitions" style="float:left; height:%dpx; width:%dpx">
+                <svg></svg>
+            </div>
+            """ % (divId, self.height, width))
+        print("</div>")
+        
+        # And finally plot the charts
+
+        delay = self.delay
+        for dataConfig, divId, width in zip(dataConfigs, self.divIds, _widths):
+            self.data.append(dataConfig["data"])
+            self._send("plot", delay, divId, dataConfig)
+            delay = 0
 
 
     def plot(self, dataConfig):
-        Nvd3Chart._plotId = Nvd3Chart._plotId + 1
-        
-        config = dataConfig["config"]
+        if isinstance(dataConfig, list):
+            self._plot(dataConfig)
+        else:
+            self._plot([dataConfig])
+
+
+    def replace(self, dataConfig, chart=0):
         data = dataConfig["data"]
-
-        if config.get("width"):
-            self.width = config.get("width")
-
-        if config.get("height"):
-            self.height = config.get("height")
-
-        if config.get("halfPie"):
-            config["height"] = self.height * 2
-            
-        print("%html")
-        print("""
-        <div id="%s"  class='with-3d-shadow with-transitions' style="height:%dpx; width:%dpx">
-            <svg></svg>
-        </div>
-        """ % (self._divId(), self.height, self.width))
-        
-        self.data = data
-        self._send("plot", 200, dataConfig)
-
-
-    def replace(self, dataConfig):
-        data = dataConfig["data"]
-        self.data = data
-        self._send("replace", 0, data)
+        self.data[chart] = data
+        self._send("replace", 0, data, 0)
     
         
-    def append(self, dataConfig):                              # needs to do the same as the javascript part
+    def append(self, dataConfig, chart=0):                              # needs to do the same as the javascript part
         newData = dataConfig["data"]
 
-        def _appendData(data, newData):
-            data["values"] = data["values"] + newData["values"]
-            for key in newData.keys():
-                if key not in ["key", "values"]:
-                    data[key] = newData[key]
+        def _appendData(dataType, data, newData):
+            if dataType == "kv":
+                if data["key"] == newData["key"]:
+                    data["values"] = data["values"] + newData["values"]
+                    for key in newData.keys():
+                        if key not in ["key", "values"]:
+                            data[key] = newData[key]
+            else:
+                data = data + newData
 
-        if type(self.data) == list and type(newData) == list:
-            for i in range(len(self.data)):
-                _appendData(self.data[i], newData[i])
+            return data
+
+        dataType = self._identifyData(self.data[chart])
+
+        if dataType == "kv":
+            for i in range(len(self.data[chart])):
+                self.data[chart][i] = _appendData("kv", self.data[chart][i], newData[i])
+        elif dataType == "xy":
+                self.data[chart] = _appendData("xy", self.data[chart], newData)
         else:
-            _appendData(self.data, newData)
-            
-        self._send("append", 0, newData)
+            raise(ValueError('Unknown data type'))
+
+        self._send("append", 0, self.divIds[chart], newData)
     
             
-    def update(self, rowIndices, dataConfig):              # needs to do the same as the javascript part
+    def update(self, rowIndices, dataConfig, chart=0):              # needs to do the same as the javascript part
         changedData = dataConfig["data"]
         
         def _updateData(data, rowIndices, changedData):
@@ -94,31 +144,32 @@ class Nvd3Chart(object):
                 if key not in ["key", "values"]:
                     data[key] = changedData[key]
 
-        if type(self.data) == list and type(changedData) == list:
-            for i in range(len(self.data)):
-                _updateData(self.data[i], rowIndices, changedData[i])
+        if type(self.data[chart]) == list and type(changedData) == list:
+            for i in range(len(self.data[chart])):
+                _updateData(self.data[chart][i], rowIndices, changedData[i])
         else:
-            _updateData(self.data, rowIndices, changedData)
+            _updateData(self.data[chart], rowIndices, changedData)
             
-        self._send("update", 0, {"rowIndices":rowIndices, "changedData":changedData})
+        self._send("update", 0, self.divIds[chart], {"rowIndices":rowIndices, "changedData":changedData})
 
         
-    def delete(self, rowIndices):              # needs to do the same as the javascript part
+    def delete(self, rowIndices, chart=0):              # needs to do the same as the javascript part
 
         sortedIndices = sorted(rowIndices, reverse=True)
         def _deleteData(data, rowIndices):
             for i in sortedIndices:
-                data["values"].pop(i)
+                data[chart]["values"].pop(i)
     
-        if type(self.data) == list:
-            for i in range(len(self.data)):
+        if type(self.data[chart]) == list:
+            for i in range(len(self.data[chart])):
                 _deleteData(self.data[i], rowIndices)
         else:
-            _deleteData(self.data, rowIndices)
+            _deleteData(self.data[chart], rowIndices)
             
-        self._send("delete", 0, {"rowIndices":sortedIndices})
+        self._send("delete", 0, self.divIds[chart], {"rowIndices":sortedIndices})
         
-    def saveAsPng(self, filename=None):
+
+    def saveAsPng(self, filename=None, chart=0):
         if filename is None:
-            filename = self._divId
-        self._send("saveAsPng", 0, {"filename":filename})
+            filename = self.divIds[chart]
+        self._send("saveAsPng", 0, self.divIds[chart], {"filename":filename})

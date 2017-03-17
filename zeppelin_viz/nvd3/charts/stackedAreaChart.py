@@ -18,7 +18,7 @@ from ..nvd3_data import Nvd3Data
 
 class StackedAreaChart(Nvd3Chart):
     valueAttributes = []
-
+    
     def __init__(self, nvd3Functions):
         super(self.__class__, self).__init__(nvd3Functions)
         self.funcName = "stackedAreaChart"
@@ -43,4 +43,4 @@ class StackedAreaChart(Nvd3Chart):
         valuesConfig, chartConfig = nvd3data.splitConfig(config, len(series), self.valueAttributes)
 
         data = [nvd3data.convert(df, group, series[i], config=valuesConfig[i]) for i in range(len(series))]
-        return {"data": data, "config": chartConfig} 
+        return {"data": data, "config": chartConfig}
