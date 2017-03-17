@@ -18,21 +18,21 @@ from ..nvd3_data import Nvd3Data
 
 class PieChart(Nvd3Chart):
     valueAttributes = []
-
+    
     def __init__(self, nvd3Functions):
         super(self.__class__, self).__init__(nvd3Functions)
         self.funcName = "pieChart"
         self.funcBody = """
             function(session, object) {
-                session.__functions.makeChart(session, object, function() {
 
-                    var chart = nv.models.pieChart()
-                        .showLabels(true)
-                        .growOnHover(true)
-                        .labelType('value')
+                var chart = nv.models.pieChart()
+                    .showLabels(true)
+                    .growOnHover(true)
+                    .labelType('value')
+                    .legendPosition('top')
+                    .showTooltipPercent(true)
 
-                    return chart
-                })
+               session.__functions.makeChart(session, object, chart);
             }        
         """
 

@@ -27,7 +27,7 @@ from .charts.scatterPlusLineChart     import ScatterPlusLineChart
 from .charts.stackedAreaChart         import StackedAreaChart
 from .charts.pieChart                 import PieChart
 from .charts.sunBurstChart            import SunBurstChart
-
+from .charts.parallelCoordinatesChart import ParallelCoordinatesChart
 
 class Nvd3(object):
     
@@ -107,7 +107,10 @@ class Nvd3(object):
         self.register(chart.funcName, chart.funcBody)
         return chart
 
-
+    def parallelCoordinatesChart(self):
+        chart = ParallelCoordinatesChart(self.nvd3Functions)
+        self.register(chart.funcName, chart.funcBody)
+        return chart
 
     # Source: http://d3js.org
     def c10(self):

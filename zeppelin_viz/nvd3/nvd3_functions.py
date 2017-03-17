@@ -19,7 +19,7 @@ class Nvd3Functions(object):
     
     makeChart = """
         
-makeChart = function(session, object, chartFunction) {
+makeChart = function(session, object, chart) {
     var cacheId = "__nv__chart_cache_" + object.plotId;
     
     d3.selectAll('.nvtooltip').style('opacity', '0');  // remove all "zombie" tooltips
@@ -27,6 +27,33 @@ makeChart = function(session, object, chartFunction) {
     nv.utils.windowResize = function(chart) { console.info("windowResize not supported") } // avoid d3 translate(Nan,5) errors
     var duration = 350;
 
+    var configure = function(chartModel, config) {
+        for (c in config) {
+            if ((typeof(config[c]) === "object") && ! Array.isArray(config[c])) {       // sub config, 1 level
+                for (c2 in config[c]) {
+                    if (c2 == "tickFormat") {
+                        format = config[c][c2];
+                        if (format[0] == "%") {
+                            chart[c][c2](function(d) { return d3.time.format(format)(new Date(d)) });
+                        } else {
+                            chart[c][c2](d3.format(format));
+                        }
+                    } else {
+                        chart[c][c2](config[c][c2]);
+                    }
+                }
+            } else {                                                                     // direct config
+                if (c === "halfPie" && config[c]) {
+                    chart.pie.startAngle(function(d) { return d.startAngle/2 - Math.PI/2 })
+                             .endAngle(function(d)   { return d.endAngle/2   - Math.PI/2 });
+                } else {
+                    chart[c](config[c]);
+                }
+            }
+        }
+        return chart;
+    }
+    
     if (object.event == "plot") {
         console.log("plot " + object.plotId)
 
@@ -39,18 +66,9 @@ makeChart = function(session, object, chartFunction) {
 
         nv.addGraph(function() {
             try {
-                chart = chartFunction();     // returns the user defined chart
+                chart = configure(chart, config);
             } catch(err) {
                 console.error(err.message);
-            }
-            
-            for (c in config) {
-                if (c === "halfPie" && config[c]) {
-                    chart.pie.startAngle(function(d) { return d.startAngle/2 - Math.PI/2 })
-                             .endAngle(function(d)   { return d.endAngle/2   - Math.PI/2 });
-                } else {
-                    chart[c](config[c]);
-                }
             }
             
             chartData = d3.select(divId).datum(data);

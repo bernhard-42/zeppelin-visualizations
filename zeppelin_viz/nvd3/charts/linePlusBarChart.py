@@ -24,26 +24,23 @@ class LinePlusBarChart(Nvd3Chart):
         self.funcName = "linePlusBarChart"
         self.funcBody = """
             function(session, object) {
-                session.__functions.makeChart(session, object, function() {
 
-                    chart = nv.models.linePlusBarChart()
-                        .margin({top: 50, right: 80, bottom: 30, left: 80})
-                        .legendRightAxisHint(' [Using Right Axis]')
-                        .color(d3.scale.category10().range());
-                    
-                    chart.xAxis.tickFormat(function(d) {
-                        return d3.time.format('%x')(new Date(d))
-                    }).showMaxMin(false);
-                    
-                    chart.y2Axis.tickFormat(function(d) { return '$' + d3.format(',f')(d) });
-                    chart.bars.forceY([0]).padData(false);
-                    
-                    chart.x2Axis.tickFormat(function(d) {
-                        return d3.time.format('%x')(new Date(d))
-                    }).showMaxMin(false);
-                    
-                    return chart;
-                })
+                chart = nv.models.linePlusBarChart()
+                          .margin({bottom: 50, left: 70, right:50})
+
+                chart.xAxis.showMaxMin(false)
+                           .tickFormat(d3.format(',.1f'))
+
+                chart.x2Axis.showMaxMin(false)
+                           .tickFormat(d3.format(',.1f'))
+
+                chart.y1Axis.showMaxMin(false)
+                           .tickFormat(d3.format(',.1f'))
+
+                chart.y2Axis.showMaxMin(false)
+                           .tickFormat(d3.format(',.1f'))
+                
+                session.__functions.makeChart(session, object, chart);
             }
         """
  

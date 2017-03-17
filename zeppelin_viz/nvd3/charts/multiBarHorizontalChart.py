@@ -19,24 +19,23 @@ from ..nvd3_data import Nvd3Data
 class MultiBarHorizontalChart(Nvd3Chart):
     valueAttributes = []
     
-    
     def __init__(self, nvd3Functions):
         super(self.__class__, self).__init__(nvd3Functions)
         self.funcName = "multiBarHorizontalChart"
         self.funcBody = """
             function(session, object) {
-                session.__functions.makeChart(session, object, function() {
 
-                    var chart = nv.models.multiBarHorizontalChart()
-                        .margin({left: 100})
-                        .stacked(true);
-                        
-                    chart.yAxis.tickFormat(d3.format(',.2f'));
-                    chart.yAxis.axisLabel('Y Axis');
-                    chart.xAxis.axisLabel('X Axis').axisLabelDistance(20);
-                      
-                    return chart;
-                })
+                var chart = nv.models.multiBarHorizontalChart()
+                    .margin({bottom: 50, left: 50})
+                    .stacked(false);
+                    
+                chart.xAxis.showMaxMin(false)
+                           .tickFormat(d3.format(',.1f'))
+
+                chart.yAxis.showMaxMin(false)
+                           .tickFormat(d3.format(',.1f'))
+                  
+               session.__functions.makeChart(session, object, chart);
             }        
         """
 

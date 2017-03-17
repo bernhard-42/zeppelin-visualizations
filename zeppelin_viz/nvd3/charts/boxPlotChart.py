@@ -17,24 +17,22 @@ from ..nvd3_data import Nvd3Data
 
 
 class BoxPlotChart(Nvd3Chart):
-    valueAttributes = ["boxStyle"]
+    valueAttributes = []
 
     def __init__(self, nvd3Functions):
         super(self.__class__, self).__init__(nvd3Functions)
         self.funcName = "boxPlotChart"
         self.funcBody = """
             function(session, object) {
-                session.__functions.makeChart(session, object, function() {
 
-                    var chart = nv.models.boxPlotChart()
+                chart = nv.models.boxPlotChart()
                         .x(function(d) { return d.label })
-                    console.log("x", chart["color"])    
-                    return chart
-                })
-            }        
+
+                session.__functions.makeChart(session, object, chart);
+            }      
         """
 
-    def convert(self, df, config={}):
+    def convert(self, df, boxStyle="iqr", config={}):
         nvd3data = Nvd3Data()
 
         valuesConfig, chartConfig = nvd3data.splitConfig(config, df.shape[1], self.valueAttributes)
@@ -44,11 +42,11 @@ class BoxPlotChart(Nvd3Chart):
         q2 = df.quantile(0.5)
         q3 = df.quantile(0.75)
 
-        if valuesConfig.get("boxStyle") == "iqr": # iqr
+        if boxStyle == "iqr":          # iqr
             iqr = q3 - q1
             low = q1 - 1.5 * iqr
             high = q3 + 1.5 * iqr
-        else:                                     # "min-max"
+        else:                          # "min-max"
             low  = df.min()
             high = df.max()
             
@@ -57,10 +55,11 @@ class BoxPlotChart(Nvd3Chart):
                  for i in range(len(df.columns))] 
          
         # Add outliers
-        if valuesConfig.get("boxStyle") == "iqr":
+        if boxStyle == "iqr":
             for i in range(len(df.columns)):
                 values = df.iloc[:,i]
                 data[i]["values"]["outliers"] = list(values[(values < q1[i]-1.5*iqr[i]) | (values > q3[i]+1.5*iqr[i])])
 
 
         return {"data":data, "config":chartConfig}
+

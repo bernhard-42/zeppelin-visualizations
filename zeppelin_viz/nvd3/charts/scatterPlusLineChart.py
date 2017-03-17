@@ -24,22 +24,20 @@ class ScatterPlusLineChart(Nvd3Chart):
         self.funcName = "scatterPlusLineChart"
         self.funcBody = """
             function(session, object) {
-                session.__functions.makeChart(session, object, function() {
 
-                    var chart = nv.models.scatterChart()
-                                  .showDistX(true)
-                                  .showDistY(true)
-                                  .color(d3.scale.category10().range());
-                  
-                    //Axis settings
-                    chart.xAxis.tickFormat(d3.format('.02f'));
-                    chart.yAxis.tickFormat(d3.format('.02f'));
-                  
-                    //We want to show shapes other than circles.
-                    chart.scatter.onlyCircles = false;
+                var chart = nv.models.scatterChart()
+                              .showDistX(true)
+                              .showDistY(true)
 
-                    return chart;
-                })
+                chart.xAxis.showMaxMin(false)
+                           .tickFormat(d3.format('.1f'));
+                           
+                chart.yAxis.showMaxMin(false)
+                           .tickFormat(d3.format('.1f'));
+              
+                chart.scatter.onlyCircles = false;
+
+                session.__functions.makeChart(session, object, chart);
             }        
         """
 

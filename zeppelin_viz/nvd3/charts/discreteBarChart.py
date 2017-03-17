@@ -24,16 +24,13 @@ class DiscreteBarChart(Nvd3Chart):
         self.funcName = "discreteBarChart"
         self.funcBody = """
             function(session, object) {
-                session.__functions.makeChart(session, object, function() {
+                var chart = nv.models.discreteBarChart()
+                    .staggerLabels(true)
+                    .showValues(true)
+                    .showLegend(true)
+                    .margin({top:30})
 
-                    var chart = nv.models.discreteBarChart()
-                        .staggerLabels(true)
-                        .showValues(true)
-                        .showLegend(true)
-                        .margin({top:30})
-
-                    return chart
-                })
+                session.__functions.makeChart(session, object, chart);
             }        
         """
 

@@ -24,18 +24,17 @@ class StackedAreaChart(Nvd3Chart):
         self.funcName = "stackedAreaChart"
         self.funcBody = """
             function(session, object) {
-                session.__functions.makeChart(session, object, function() {
 
-                    chart = nv.models.stackedAreaChart()
-                        .useInteractiveGuideline(true)
-                        .controlLabels({stacked: "Stacked"})
+                chart = nv.models.stackedAreaChart()
+                    .useInteractiveGuideline(true)
+                    .controlLabels({stacked: "Stacked"})
 
-                    chart.xAxis.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
-                    chart.yAxis.tickFormat(d3.format(',.4f'));
+                chart.xAxis.showMaxMin(false)
+                           .tickFormat(d3.format(',.1f'));
+                chart.yAxis.showMaxMin(false)
+                           .tickFormat(d3.format(',.1f'));
 
-
-                    return chart
-                })
+               session.__functions.makeChart(session, object, chart);
             }        
         """
 

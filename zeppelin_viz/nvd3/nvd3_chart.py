@@ -41,12 +41,13 @@ class Nvd3Chart(object):
 
         if config.get("width"):
             self.width = config.get("width")
+
         if config.get("height"):
-            if config.get("halfPie"):
-                self.height = int(config.get("height") / 2)
-            else:
-                self.height = config.get("height")
-                
+            self.height = config.get("height")
+
+        if config.get("halfPie"):
+            config["height"] = self.height * 2
+            
         print("%html")
         print("""
         <div id="%s"  class='with-3d-shadow with-transitions' style="height:%dpx; width:%dpx">

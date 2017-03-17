@@ -24,25 +24,20 @@ class MultiBarChart(Nvd3Chart):
         self.funcName = "multiBarChart"
         self.funcBody = """
             function(session, object) {
-                session.__functions.makeChart(session, object, function() {
 
-                    chart = nv.models.multiBarChart()
-                        .margin({bottom: 100, left: 70})
-                        .rotateLabels(45)
-                        .groupSpacing(0.1)
+                chart = nv.models.multiBarChart()
+                    .margin({bottom: 50, left: 50})
+                    .groupSpacing(0.1)
+                    .reduceXTicks(false)
+                    .staggerLabels(true);
 
-                    chart.reduceXTicks(false).staggerLabels(true);
+                chart.xAxis.showMaxMin(false)
+                           .tickFormat(d3.format(',.1f'))
 
-                    chart.xAxis
-                        .showMaxMin(false)
-                        .tickFormat(d3.format(',.2f'))
+                chart.yAxis.showMaxMin(false)
+                           .tickFormat(d3.format(',.1f'))
 
-                    chart.yAxis
-                        .axisLabelDistance(-5)
-                        .tickFormat(d3.format(',.01f'))
-
-                    return chart
-                })
+                session.__functions.makeChart(session, object, chart);
             }        
         """
 

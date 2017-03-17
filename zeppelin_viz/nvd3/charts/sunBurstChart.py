@@ -17,27 +17,18 @@ from ..nvd3_data import Nvd3Data
 
 
 class SunBurstChart(Nvd3Chart):
-    valueAttributes = []
-
+    
     def __init__(self, nvd3Functions):
         super(self.__class__, self).__init__(nvd3Functions)
         self.funcName = "sunBurstChart"
         self.funcBody = """
             function(session, object) {
-                session.__functions.makeChart(session, object, function() {
+                chart = nv.models.sunburstChart()
+                          .mode("count")
 
-                    chart = nv.models.sunburstChart();
-                    var mode = 'x'
-                    chart.color(d3.scale.category20c());
-
-                    return chart
-                })
+                session.__functions.makeChart(session, object, chart);
             }        
         """
 
     def convert(self, df, group, series, config={}):
-        nvd3data = Nvd3Data()
-        valuesConfig, chartConfig = nvd3data.splitConfig(config, len(series), self.valueAttributes)
-
-        data = [nvd3data.convert(df, group, series[i], config=valuesConfig[i]) for i in range(len(series))]
-        return {"data": data, "config": chartConfig} 
+        print("Not implemented yet") 

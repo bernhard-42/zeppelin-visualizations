@@ -24,26 +24,14 @@ class LineChart(Nvd3Chart):
         self.funcName = "lineChart"
         self.funcBody = """
             function(session, object) {
-                session.__functions.makeChart(session, object, function() {
-                    console.log(session, object)
-                    chart = nv.models.lineChart()
-                              .useInteractiveGuideline(true)
 
-                    chart.margin({right:  40});
-                    chart.margin({bottom: 30});
-                    
-                    chart.xAxis
-                        .axisLabel("X")
-                         .tickFormat(d3.format(',.2f'))
-                        .staggerLabels(false)
-                    chart.x2Axis.tickFormat(d3.format(',f'))
-                    
-                    chart.yAxis
-                         .axisLabel('Voltage (v)')
-                         .tickFormat(d3.format(',.2f'));
+                chart = nv.models.lineChart()
+                        .focusEnable(false)
+                        .useInteractiveGuideline(true)
+                        .margin({right:  40})
+                        .margin({bottom: 60})
 
-                   return chart
-                })
+                session.__functions.makeChart(session, object, chart);
             }        
         """
 
