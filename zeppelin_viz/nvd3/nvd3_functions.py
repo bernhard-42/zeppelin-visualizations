@@ -41,10 +41,9 @@ makeChart = function(session, object, chart) {
 
     var configure = function(chartModel, config) {
         for (c in config) {
-            if (c == "margin") {
+            if (c == "margin" || c == "arcRadius") {
                 chart[c](config[c]);                
             } else if ((typeof(config[c]) === "object") && ! Array.isArray(config[c])) {       // sub config, 1 level
-
                 for (c2 in config[c]) {
                     if (c2 == "tickFormat") {
                         format = config[c][c2];
@@ -86,7 +85,7 @@ makeChart = function(session, object, chart) {
             } catch(err) {
                 console.error(err.message);
             }
-            
+
             chartData = d3.select(divId).datum(data);
             chartData.transition().duration(500).call(chart);
             

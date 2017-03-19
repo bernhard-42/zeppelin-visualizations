@@ -16,42 +16,44 @@ from ..nvd3_chart import Nvd3Chart
 import pandas as pd
 
 
-class PieChart(Nvd3Chart):
-
-    funcName = "pieChart"
+class HistoricalBarChart(Nvd3Chart):
+    funcName = "historicalBarChart"
     funcBody = """
         function(session, object) {
-            var chart = nv.models.pieChart()
-                .showLabels(true)
-                .growOnHover(true)
-                .labelType('value')
-                .legendPosition('top')
-                .showTooltipPercent(true)
 
-           session.__functions.makeChart(session, object, chart);
+            chart = nv.models.historicalBarChart();
+            chart.useInteractiveGuideline(true)
+                 .showLegend(false)
+                      
+            chart.xAxis.showMaxMin(false)
+                       .tickFormat(function(d) { return d3.time.format("%d.%m.%Y")(new Date(d)) })
+
+            chart.yAxis.showMaxMin(true)
+                       .tickFormat(d3.format(',.1f'))
+
+            session.__functions.makeChart(session, object, chart);
         }        
     """
-    
+
     def __init__(self, nvd3Functions):
         super(self.__class__, self).__init__(nvd3Functions)
 
     def convert(self, data, key, value):
         """
-        Convert data to PieChart format
+        Convert data to HistoricalBarChart format
         
         Example:
-            >>> df.head(3)
-                     Series       Mean
-                0  Series A  10.709464
-                1  Series B   5.073523
-                2  Series C   2.852349
-                
-            >>> p = nv.pieChart()
+            >>> df.head(1)
+                    Date  Adj_Close  Close   High     Low   Open Symbol    Volume      Timestamp
+            0 2016-03-18      11.01  11.01  11.37  10.715  11.13    HDP  811100.0  1458259200000
+            
+            >>> hb = nv.historicalBarChart()
+            >>> hb = HistoricalBarChart(nv.nvd3Functions)
 
-            >>> config={"height": 350, "width": 500, "color": nv.c20(), "yDomain":[0,12]}
-            >>> data = p.convert(df, key="Series", value="Mean")
-                
-            >>> p.plot({"data":data, "config":config})
+            >>> config = {"color":nv.c20()[4:]}
+            >>> data = hb.convert(hdp, "Timestamp", "Volume")
+    
+            >>> hb.plot({"data": data, "config":config})
 
         Parameters
         ----------
@@ -65,19 +67,19 @@ class PieChart(Nvd3Chart):
               1  2  T
               2  3  D
         key : string
-            Name of column holding values names
+            Column name or dict key for values to used for the x axis
         value : string
-            Name of column holding values
+            Column name or dict key for values to used for the y axis
 
         Returns
         -------
         dict
-            The input data converted to the specific nvd3 chart format        
-        """
+            The input data converted to the specific nvd3 chart format
+        
+        """        
         
         df = data if isinstance(data, pd.DataFrame) else pd.DataFrame(data)
         
         nvd3Data = df.loc[:,[key, value]].rename(str, {key:"x", value:"y"}).to_dict("records")
-
-        return nvd3Data
-
+        
+        return [{"key": key, "values":nvd3Data}]

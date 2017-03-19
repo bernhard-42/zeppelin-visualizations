@@ -13,6 +13,8 @@
 # limitations under the License.
 
 from .nvd3_functions import Nvd3Functions
+import numpy as np
+
 
 class Nvd3Chart(object):
     _plotId = 0
@@ -42,6 +44,20 @@ class Nvd3Chart(object):
         else:
             raise(ValueError('Unknown data type'))
 
+
+
+    def _deNumpy(self, data):
+        if isinstance(data, (list, tuple)):
+            return [self._deNumpy(o) for o in data]
+        elif isinstance(data, dict):
+            return {k:self._deNumpy(v) for k,v in data.items()}
+        else:
+            return np.asscalar(data) if isinstance(data, np.generic) else data
+   
+
+    def deNumpy(self, dataConfig):
+        return {k:(self._deNumpy(v) if k=="data" else v) for k,v in dataConfig.items()}
+        
 
     def _plot(self, dataConfigs):
 
@@ -75,7 +91,7 @@ class Nvd3Chart(object):
         print("%html")
         print("""<div style="height:%dpx; width:%dpx">""" %  (self.height, self.width))
         
-        for dataConfig, divId, width in zip(dataConfigs, self.divIds, _widths):
+        for divId, width in zip(self.divIds, _widths):
             print("""
             <div id="%s" class="with-3d-shadow with-transitions" style="float:left; height:%dpx; width:%dpx">
                 <svg></svg>
@@ -87,8 +103,9 @@ class Nvd3Chart(object):
 
         delay = self.delay
         for dataConfig, divId, width in zip(dataConfigs, self.divIds, _widths):
-            self.data.append(dataConfig["data"])
-            self._send("plot", delay, divId, dataConfig)
+            dataConfig2 = self.deNumpy(dataConfig)
+            self.data.append(dataConfig2["data"])
+            self._send("plot", delay, divId, dataConfig2)
             delay = 0
 
 
@@ -106,7 +123,7 @@ class Nvd3Chart(object):
     
         
     def append(self, dataConfig, chart=0):                              # needs to do the same as the javascript part
-        newData = dataConfig["data"]
+        newData = self._deNumpy(dataConfig["data"])
 
         def _appendData(dataType, data, newData):
             if dataType == "kv":
@@ -134,7 +151,7 @@ class Nvd3Chart(object):
     
             
     def update(self, rowIndices, dataConfig, chart=0):              # needs to do the same as the javascript part
-        changedData = dataConfig["data"]
+        changedData = self._deNumpy(dataConfig["data"])
         
         def _updateData(data, rowIndices, changedData):
             for i in range(len(rowIndices)):

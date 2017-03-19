@@ -14,7 +14,6 @@
 
 
 from .nvd3_functions import Nvd3Functions
-from .nvd3_data import Nvd3Data
 from .nvd3_chart import Nvd3Chart
 
 from .charts.boxPlotChart             import BoxPlotChart
@@ -28,6 +27,10 @@ from .charts.stackedAreaChart         import StackedAreaChart
 from .charts.pieChart                 import PieChart
 from .charts.sunBurstChart            import SunBurstChart
 from .charts.parallelCoordinatesChart import ParallelCoordinatesChart
+from .charts.historicalBarChart       import HistoricalBarChart
+from .charts.candlestickBarChart      import CandlestickBarChart
+from .charts.ohlcBarChart             import OhlcBarChart
+
 
 class Nvd3(object):
     
@@ -56,59 +59,61 @@ class Nvd3(object):
 
 
     def boxPlotChart(self):
-        chart = BoxPlotChart(self.nvd3Functions)
-        self.register(chart.funcName, chart.funcBody)
-        return chart
+        self.register(BoxPlotChart.funcName, BoxPlotChart.funcBody)
+        return BoxPlotChart(self.nvd3Functions)
 
     def discreteBarChart(self):
-        chart = DiscreteBarChart(self.nvd3Functions)
-        self.register(chart.funcName, chart.funcBody)
-        return chart
+        self.register(DiscreteBarChart.funcName, DiscreteBarChart.funcBody)
+        return DiscreteBarChart(self.nvd3Functions)
 
     def multiBarChart(self):
-        chart = MultiBarChart(self.nvd3Functions)
-        self.register(chart.funcName, chart.funcBody)
-        return chart
+        self.register(MultiBarChart.funcName, MultiBarChart.funcBody)
+        return MultiBarChart(self.nvd3Functions)
 
     def multiBarHorizontalChart(self):
-        chart = MultiBarHorizontalChart(self.nvd3Functions)
-        self.register(chart.funcName, chart.funcBody)
-        return chart
+        self.register(MultiBarHorizontalChart.funcName, MultiBarHorizontalChart.funcBody)
+        return MultiBarHorizontalChart(self.nvd3Functions)
 
     def lineChart(self):
-        chart = LineChart(self.nvd3Functions)
-        self.register(chart.funcName, chart.funcBody)
-        return chart
+        self.register(LineChart.funcName, LineChart.funcBody)
+        return LineChart(self.nvd3Functions)
 
     def linePlusBarChart(self):
-        chart = LinePlusBarChart(self.nvd3Functions)
-        self.register(chart.funcName, chart.funcBody)
-        return chart
+        self.register(LinePlusBarChart.funcName, LinePlusBarChart.funcBody)
+        return LinePlusBarChart(self.nvd3Functions)
 
     def scatterPlusLineChart(self):
-        chart = ScatterPlusLineChart(self.nvd3Functions)
-        self.register(chart.funcName, chart.funcBody)
-        return chart
+        self.register(ScatterPlusLineChart.funcName, ScatterPlusLineChart.funcBody)
+        return ScatterPlusLineChart(self.nvd3Functions)
 
     def stackedAreaChart(self):
-        chart = StackedAreaChart(self.nvd3Functions)
-        self.register(chart.funcName, chart.funcBody)
-        return chart
+        self.register(StackedAreaChart.funcName, StackedAreaChart.funcBody)
+        return StackedAreaChart(self.nvd3Functions)
 
     def pieChart(self):
-        chart = PieChart(self.nvd3Functions)
-        self.register(chart.funcName, chart.funcBody)
-        return chart
+        self.register(PieChart.funcName, PieChart.funcBody)
+        return PieChart(self.nvd3Functions)
 
     def sunBurstChart(self):
-        chart = SunBurstChart(self.nvd3Functions)
-        self.register(chart.funcName, chart.funcBody)
-        return chart
+        self.register(SunBurstChart.funcName, SunBurstChart.funcBody)
+        return SunBurstChart(self.nvd3Functions)
 
     def parallelCoordinatesChart(self):
-        chart = ParallelCoordinatesChart(self.nvd3Functions)
-        self.register(chart.funcName, chart.funcBody)
-        return chart
+        self.register(ParallelCoordinatesChart.funcName, ParallelCoordinatesChart.funcBody)
+        return ParallelCoordinatesChart(self.nvd3Functions)
+
+    def ohlcBarChart(self):
+        self.register(OhlcBarChart.funcName, OhlcBarChart.funcBody)
+        return OhlcBarChart(self.nvd3Functions)
+
+    def candlestickBarChart(self):
+        self.register(CandlestickBarChart.funcName, CandlestickBarChart.funcBody)
+        return CandlestickBarChart(self.nvd3Functions)
+
+    def historicalBarChart(self):
+        self.register(HistoricalBarChart.funcName, HistoricalBarChart.funcBody)
+        return HistoricalBarChart(self.nvd3Functions)
+
 
     # Source: http://d3js.org
     def c10(self):

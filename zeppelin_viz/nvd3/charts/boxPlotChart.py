@@ -13,50 +13,73 @@
 # limitations under the License.
 
 from ..nvd3_chart import Nvd3Chart
-from ..nvd3_data import Nvd3Data
 import pandas as pd
 
 
 class BoxPlotChart(Nvd3Chart):
-    valueAttributes = []
+
+    funcName = "boxPlotChart"
+    funcBody = """
+        function(session, object) {
+
+            chart = nv.models.boxPlotChart()
+                    .x(function(d) { return d.label })
+
+            session.__functions.makeChart(session, object, chart);
+        }      
+    """
 
     def __init__(self, nvd3Functions):
         super(self.__class__, self).__init__(nvd3Functions)
-        self.funcName = "boxPlotChart"
-        self.funcBody = """
-            function(session, object) {
 
-                chart = nv.models.boxPlotChart()
-                        .x(function(d) { return d.label })
 
-                session.__functions.makeChart(session, object, chart);
-            }      
+    def convert(self, data, keys=None, boxStyle="iqr"):
         """
+        Convert data to BoxPlotChart format
+        
+        Example:
+        Convert data to BoxPlotChart format
+        
+        Example:
+            >>> df.head(3)
+                    Series A  Series B  Series C  Series D   Series E
+                0   7.629883  6.977595  3.323865  7.323412  14.111551
+                1  14.067483  6.235542  3.285066  6.990191   7.673949
+                2   6.843873  4.333124  4.258416  8.382573   9.060179
 
-    # Input Data: 
-    # data:
-    #    Dict of lists
-    #      {'A': (1, 2, 3, 4, 5, 6),
-    #       'B': (11, 12, 13, 14, 15, 16),
-    #       'C': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6],
-    #       'D': ('C', 'T', 'D', 'S', 'U', 'D')}
-    #
-    #     OR pandas DataFrame
-    #         A   B    C  D
-    #      0  1  11  0.1  C
-    #      1  2  12  0.2  T
-    #      2  3  13  0.3  D
-    #      3  4  14  0.4  S
-    #      4  5  15  0.5  U
-    #      5  6  16  0.6  D
+            >>> bp = nv.boxPlotChart()
+            >>> config = {"height": 400, "width":400, "yDomain":[-5, 25], "maxBoxWidth":False, "color":nv.c10()}
+            >>> data = bp.convert(bp_df, ["Series A", "Series B", "Series D"], boxStyle="iqr")
+            >>> bp.plot({"data":data, "config":config})
 
-    def convert(self, data, boxStyle="iqr", config={}):
+        Parameters
+        ----------
+        data : dict of lists or Pandas DataFrame 
+            If the paramter is a dict, each keys represent the name of the dataset in the list
+              { 'A': ( 1,   2,   3),
+                'B': ('C', 'T', 'D' }
+            or a pandas DataFrame, each column representing a dataset
+                 A  B
+              0  1  C
+              1  2  T
+              2  3  D
+        keys : list of strings (optional)
+            Column names to create boxplot for. If missing all columns are used.
+        boxStyle : string
+            'iqr':     low whisker = q1-1.5*iqr,  high whisker = q3+1.5*iqr (iq5 = q3-q1)
+            'min-max': low whisker = min,         high whisker = max
+
+        Returns
+        -------
+        dict
+            The input data converted to the specific nvd3 chart format
+        
+        """                
+
         df = data if isinstance(data, pd.DataFrame) else pd.DataFrame(data)
-            
-        nvd3data = Nvd3Data()
-
-        valuesConfig, chartConfig = nvd3data.splitConfig(config, df.shape[1], self.valueAttributes)
-        valuesConfig = valuesConfig[0]
+ 
+        if keys is not None:
+            df = df[keys]
 
         q1 = df.quantile(0.25)
         q2 = df.quantile(0.5)
@@ -80,8 +103,7 @@ class BoxPlotChart(Nvd3Chart):
                 values = df.iloc[:,i]
                 data[i]["values"]["outliers"] = list(values[(values < q1[i]-1.5*iqr[i]) | (values > q3[i]+1.5*iqr[i])])
 
-
-        return {"data":data, "config":chartConfig}
+        return data
     
     def append(self, dataConfig, chart=0):
         print("Not supported")

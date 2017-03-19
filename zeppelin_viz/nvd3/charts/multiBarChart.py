@@ -13,40 +13,79 @@
 # limitations under the License.
 
 from ..nvd3_chart import Nvd3Chart
-from ..nvd3_data import Nvd3Data
 import pandas as pd
 
 
 class MultiBarChart(Nvd3Chart):
-    valueAttributes = []
+    
+    funcName = "multiBarChart"
+    funcBody = """
+        function(session, object) {
+
+            chart = nv.models.multiBarChart()
+                .margin({bottom: 50, left: 50})
+                .groupSpacing(0.1)
+                .reduceXTicks(false)
+                .staggerLabels(true);
+
+            chart.xAxis.showMaxMin(false)
+                       .tickFormat(d3.format(',.1f'))
+
+            chart.yAxis.showMaxMin(false)
+                       .tickFormat(d3.format(',.1f'))
+
+            session.__functions.makeChart(session, object, chart);
+        }        
+    """
     
     def __init__(self, nvd3Functions):
         super(self.__class__, self).__init__(nvd3Functions)
-        self.funcName = "multiBarChart"
-        self.funcBody = """
-            function(session, object) {
 
-                chart = nv.models.multiBarChart()
-                    .margin({bottom: 50, left: 50})
-                    .groupSpacing(0.1)
-                    .reduceXTicks(false)
-                    .staggerLabels(true);
+    def convert(self, data, key, values):
+        """
+        Convert data to MultiBarChart format
+        Example:
+            >>> x = np.linspace(0, 4*np.pi, 10)
+                df = pd.DataFrame({"X":x*100, "Sin":np.sin(x), "Cos":np.cos(x), "ArcTan":np.arctan(x-2*np.pi)/3})
+            
+            >>> mb = nv.multiBarChart()
 
-                chart.xAxis.showMaxMin(false)
-                           .tickFormat(d3.format(',.1f'))
+            >>> data = mb.convert(l1_df, "X", ["Sin", "Cos", "ArcTan"], keyAttributes)
+                
+            >>> config={"height":400, "width": 1000,
+                        "focusEnable": False, "color":nv.c10()[::2], 
+                        "yAxis": {"axisLabel":"F(X)", "tickFormat":",.1f"}, 
+                        "xAxis":{"axisLabel":"X", "tickFormat":",.1f"}}
+                        
+            >>> mb.plot({"data":data, "config":config})
+            
+        Parameters
+        ----------
+        data : dict of lists or Pandas DataFrame 
+            If the paramter is a dict, each keys represent the name of the dataset in the list
+              { 'A': ( 1,   2,   3),
+                'B': ('C', 'T', 'D' }
+            or a pandas DataFrame, each column representing a dataset
+                 A  B
+              0  1  C
+              1  2  T
+              2  3  D
+        key : string
+            Column name or dict key for values to be used for the x axis
+        values : list of strings
+            Column names or dict keys for values to be used for the bars
 
-                chart.yAxis.showMaxMin(false)
-                           .tickFormat(d3.format(',.1f'))
-
-                session.__functions.makeChart(session, object, chart);
-            }        
+        Returns
+        -------
+        dict
+            The input data converted to the specific nvd3 chart format
         """
 
-    def convert(self, data, group, series, config={}):
         df = data if isinstance(data, pd.DataFrame) else pd.DataFrame(data)
-        
-        nvd3data = Nvd3Data()
-        valuesConfig, chartConfig = nvd3data.splitConfig(config, len(series), self.valueAttributes)
 
-        data = [nvd3data.convert(df, group, series[i], config=valuesConfig[i]) for i in range(len(series))]
-        return {"data": data, "config": chartConfig} 
+        nvd3Data = []
+        for i in range(len(values)):
+            nvd3Data.append({"key":values[i], "values":df.loc[:,[key, values[i]]].rename(str,{key:"x", values[i]:"y"}).to_dict("records")})
+
+        return nvd3Data 
+

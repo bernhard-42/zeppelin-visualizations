@@ -13,23 +13,42 @@
 # limitations under the License.
 
 from ..nvd3_chart import Nvd3Chart
-from ..nvd3_data import Nvd3Data
 import pandas as pd
 
 
 class SunBurstChart(Nvd3Chart):
+
+    funcName = "sunBurstChart"
+    funcBody = """
+        function(session, object) {
+            chart = nv.models.sunburstChart()
+                      .mode("count")
+
+            session.__functions.makeChart(session, object, chart);
+        }        
+    """
     
     def __init__(self, nvd3Functions):
         super(self.__class__, self).__init__(nvd3Functions)
-        self.funcName = "sunBurstChart"
-        self.funcBody = """
-            function(session, object) {
-                chart = nv.models.sunburstChart()
-                          .mode("count")
 
-                session.__functions.makeChart(session, object, chart);
-            }        
+    def convert(self, df):
         """
-
-    def convert(self, df, group, series, config={}):
+        Directly use data in the form:
+            
+            data = [{
+                "name": "flare",
+                "children": [
+                    {
+                        "name": "analytics",
+                        "children": [
+                            {
+                                "name": "cluster",
+                                "children": [
+                                    {"name": "AgglomerativeCluster", "size": 3938},
+                                    {"name": "CommunityStructure", "size": 3812},
+                                    {"name": "HierarchicalCluster", "size": 6714},
+                                    {"name": "MergeEdge", "size": 743}
+                                ]
+                            }, ....
+        """
         print("Not implemented yet") 

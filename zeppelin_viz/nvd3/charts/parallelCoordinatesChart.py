@@ -12,66 +12,89 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from zeppelin_viz.nvd3.nvd3_chart import Nvd3Chart
-from zeppelin_viz.nvd3.nvd3_data import Nvd3Data
+from ..nvd3_chart import Nvd3Chart
 import pandas as pd
 
 
 class ParallelCoordinatesChart(Nvd3Chart):
-    valueAttributes = ["color", "strokeWidth"]
-    
-    def __init__(self, nvd3Functions, height=400, width=1024):
-        super(self.__class__, self).__init__(nvd3Functions)
-        self.height = height
-        self.width = width
-        self.funcName = "parallelCoordinatesChart"
-        self.funcBody = """
-            function(session, object) {
-                for(i in object.data.dim) {
-                    object.data.dim[i].format = d3.format(object.data.dim[i].format)
-                }
 
-                chart = nv.models.parallelCoordinatesChart()
-                        .dimensionData(object.data.dim)
-                        .displayBrush(true)
-                        .lineTension(0.85);
-
-                session.__functions.makeChart(session, object, chart);
+    funcName = "parallelCoordinatesChart"
+    funcBody = """
+        function(session, object) {
+            for(i in object.data.dim) {
+                object.data.dim[i].format = d3.format(object.data.dim[i].format)
             }
-        """
 
-    def convert(self, data, group, series, dimFormat=None, dimTooltip=None, color=None, strokeWidth=None, config={}):
+            chart = nv.models.parallelCoordinatesChart()
+                    .dimensionData(object.data.dim)
+                    .displayBrush(true)
+                    .lineTension(0.85);
+
+            session.__functions.makeChart(session, object, chart);
+        }
+    """
+    
+    def __init__(self, nvd3Functions):
+        super(self.__class__, self).__init__(nvd3Functions)
+
+    def convert(self, data, key, values, dimAttributes, lineAttributes={}, config={}):
+        """
+        Convert data to ParallelCoordinatesChart format
+        Example:
+            >>> iris.loc[iris.Name=="Iris-setosa",     "color"] = nv.c10()[0]
+            >>> iris.loc[iris.Name=="Iris-versicolor", "color"] = nv.c10()[1]
+            >>> iris.loc[iris.Name=="Iris-virginica",  "color"] = nv.c10()[2]
+            >>> iris["strokeWidth"] = 0.5
+            >>> iris.head()
+ 
+                    SepalLength  SepalWidth  PetalLength  PetalWidth         Name    color  strokeWidth
+                0          5.1         3.5          1.4         0.2  Iris-setosa  #1f77b4          0.5           
+            >>> pc = nv.parallelCoordinatesChart()
+
+            >>> config = {"height": 600}
+            
+            >>> data, dim = pc.convert(iris, 'Name', ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth'],
+                                   lineAttributes=["color", "strokeWidth"], 
+                                   dimAttributes= {"format": [",.1f", ",.1f", ",.1f", ",.1f"]})
+            >>> pc.plot({"data":data, "dim":dim, "config":config})    
+            
+        Parameters
+        ----------
+        data : dict of lists or Pandas DataFrame 
+            If the paramter is a dict, each keys represent the name of the dataset in the list
+              { 'A': ( 1,   2,   3),
+                'B': ('C', 'T', 'D' }
+            or a pandas DataFrame, each column representing a dataset
+                 A  B
+              0  1  C
+              1  2  T
+              2  3  D
+        key : string
+            Column name or dict key for values to be used to name the lines
+        values : list of strings
+            Column names or dict keys for values to be used as dimensions (vertical lines)
+        lineAttributes : list of strings
+            Column names or dict keys for values to be used as "color" and "strokeWidth" attributes for lines
+        dimAttributes: dict
+            Dict with a list for the format of each dimension
+            
+        Returns
+        -------
+        dict
+            The input data converted to the specific nvd3 chart format
+        """
+        
         df = data if isinstance(data, pd.DataFrame) else pd.DataFrame(data)
          
-        nvd3data = Nvd3Data()
+        values2 = df.loc[:, values].to_dict("records")
+        nvd3Data = df[[key] + lineAttributes].rename(str, {key:"name"}).to_dict("records")
 
-        if color is not None:
-            config["color"] = df[color].tolist()
-            
-        if strokeWidth is not None:
-            config["strokeWidth"] = df[strokeWidth].tolist()
-            
-        valuesConfig, chartConfig = nvd3data.splitConfig(config, df.shape[0], self.valueAttributes)
+        for v, n in zip (values2, nvd3Data):
+            n["values"] = v
 
-        data = [{"name":row[group], "values": {k:v for k,v in row.items() if k != group}} for row in df.to_dict("records")]
-        for i in range(df.shape[0]):
-            for k,v in valuesConfig[i].items():
-                data[i][k] = v
-            
-        dim = [{"key":col} for col in series]
-        for i in range(len(dim)):
-            if dimFormat is not None:
-                dim[i]["format"] = dimFormat[i]
-            if dimTooltip is not None:
-                dim[i]["tooltip"] = dimTooltip[i]
+        attributes = {"key":values}
+        attributes.update(dimAttributes)
+        dim = pd.DataFrame(attributes).to_dict("records")
                 
-        return {"data": data, "dim":dim, "config": chartConfig} 
+        return (nvd3Data, dim)
 
-    def append(self, dataConfig, chart=0):
-        print("Not supported")
-
-    def update(self, rowIndices, dataConfig, chart=0):
-        print("Not supported")
-
-    def delete(self, rowIndices, chart=0):
-        print("Not supported")
