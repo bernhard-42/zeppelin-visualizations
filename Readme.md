@@ -15,12 +15,16 @@ Currently supported are
 - [NVD3](http://nvd3.org/) (more to come, using ZeppelinSession)
 
 
-Look at [Zeppelin-Viz.md](notebooks/Zeppelin-Viz.md) or import [Zeppelin-Viz.json](https://raw.githubusercontent.com/bernhard-42/zeppelin-visualizations/master/notebooks/Zeppelin-Viz.json) into Zeppelin.
+Examples:
 
-For a detailed overview of the NVD3 integration, look at [Zeppelin-Nvd3-Demo.md](notebooks/Zeppelin-Nvd3-Demo.md) or import [Zeppelin-Nvd3-Demo.json](https://raw.githubusercontent.com/bernhard-42/zeppelin-visualizations/master/notebooks/Zeppelin-Nvd3-Demo.json) into Zeppelin.
+- Look at [Zeppelin-Viz.md](notebooks/Zeppelin-Viz.md) or import [Zeppelin-Viz.json](https://raw.githubusercontent.com/bernhard-42/zeppelin-visualizations/master/notebooks/Zeppelin-Viz.json) into Zeppelin.
+
+- For a detailed overview of the NVD3 integration, look at [Zeppelin-Nvd3-Demo.md](notebooks/Zeppelin-Nvd3-Demo.md) or import [Zeppelin-Nvd3-Demo.json](https://raw.githubusercontent.com/bernhard-42/zeppelin-visualizations/master/notebooks/Zeppelin-Nvd3-Demo.json) into Zeppelin.
+
+- For more on the Bokeh integration look into [ZeppelinCommLayer](https://github.com/bernhard-42/zeppelin-ipython-shim) (https://github.com/bernhard-42/zeppelin-ipython-shim/blob/master/notebooks/ZeppelinCommLayer%20Bokeh%20Gallery.md)
 
 
-To run the Zeppelin Notebook, first install the python libraries:
+To run the Zeppelin Notebooks, first install the python libraries:
 
 ```bash
 git clone https://github.com/bernhard-42/advanced-angular-for-pyspark.git
