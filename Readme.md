@@ -21,7 +21,7 @@ Examples:
 
 - For a detailed overview of the NVD3 integration, look at [Zeppelin-Nvd3-Demo.md](notebooks/Zeppelin-Nvd3-Demo.md) or import [Zeppelin-Nvd3-Demo.json](https://raw.githubusercontent.com/bernhard-42/zeppelin-visualizations/master/notebooks/Zeppelin-Nvd3-Demo.json) into Zeppelin.
 
-- For more on the Bokeh integration look into [ZeppelinCommLayer](https://github.com/bernhard-42/zeppelin-ipython-shim) (https://github.com/bernhard-42/zeppelin-ipython-shim/blob/master/notebooks/ZeppelinCommLayer%20Bokeh%20Gallery.md)
+- For more on the Bokeh integration look into [ZeppelinCommLayer](https://github.com/bernhard-42/zeppelin-ipython-shim) ([ZeppelinCommLayerBokeh Gallery.md](https://github.com/bernhard-42/zeppelin-ipython-shim/blob/master/notebooks/ZeppelinCommLayer%20Bokeh%20Gallery.md))
 
 
 To run the Zeppelin Notebooks, first install the python libraries:
