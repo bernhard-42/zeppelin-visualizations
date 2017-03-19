@@ -17,6 +17,9 @@ Currently supported are
 
 Look at [Zeppelin-Viz.md](notebooks/Zeppelin-Viz.md) or import [Zeppelin-Viz.json](https://raw.githubusercontent.com/bernhard-42/zeppelin-visualizations/master/notebooks/Zeppelin-Viz.json) into Zeppelin.
 
+For a detailed overview of the NVD3 integration, look at [Zeppelin-Nvd3-Demo.md](notebooks/Zeppelin-Nvd3-Demo.md) or import [Zeppelin-Nvd3-Demo.json](https://raw.githubusercontent.com/bernhard-42/zeppelin-visualizations/master/notebooks/Zeppelin-Nvd3-Demo.json) into Zeppelin.
+
+
 To run the Zeppelin Notebook, first install the python libraries:
 
 ```bash
