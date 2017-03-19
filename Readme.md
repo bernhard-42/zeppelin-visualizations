@@ -12,7 +12,7 @@ allow to use python and javascript visualization libraries in Apache [Zeppelin](
 Currently supported are
 
 - [Bokeh](http://bokeh.pydata.org) (using ZeppelinCommLayer)
-- [NVD3](http://nvd3.org/) currently only LinePlusBarChart and ScatterPlusLineChart* (more to come, using ZeppelinSession)
+- [NVD3](http://nvd3.org/) (more to come, using ZeppelinSession)
 
 
 Look at [Zeppelin-Viz.md](notebooks/Zeppelin-Viz.md) or import [Zeppelin-Viz.json](https://raw.githubusercontent.com/bernhard-42/zeppelin-visualizations/master/notebooks/Zeppelin-Viz.json) into Zeppelin.
@@ -32,6 +32,9 @@ git clone https://github.com/bernhard-42/zeppelin-visualizations.git
 cd zeppelin-visualizations
 pip install .
 ```
+
+**Note:**
+Currently only Python 3 works!
 
 
 ## License
