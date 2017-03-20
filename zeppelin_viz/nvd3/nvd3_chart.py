@@ -101,12 +101,10 @@ class Nvd3Chart(object):
         
         # And finally plot the charts
 
-        delay = self.delay
         for dataConfig, divId, width in zip(dataConfigs, self.divIds, _widths):
             dataConfig2 = self.deNumpy(dataConfig)
             self.data.append(dataConfig2["data"])
-            self._send("plot", delay, divId, dataConfig2)
-            delay = 0
+            self._send("plot", self.delay, divId, dataConfig2)
 
 
     def plot(self, dataConfig):
