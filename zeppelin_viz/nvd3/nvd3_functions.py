@@ -82,12 +82,12 @@ makeChart = function(session, object, chart) {
         nv.addGraph(function() {
             try {
                 chart = configure(chart, config);
+
+                chartData = d3.select(divId).datum(data);
+                chartData.transition().duration(500).call(chart);
             } catch(err) {
                 console.error(err.message);
             }
-
-            chartData = d3.select(divId).datum(data);
-            chartData.transition().duration(500).call(chart);
             
             session[cacheId].chart = chart;
             session[cacheId].chartData = chartData;
