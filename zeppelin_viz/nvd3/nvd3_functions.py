@@ -21,6 +21,29 @@ class Nvd3Functions(object):
         
 makeChart = function(session, object, chart) {
     var cacheId = "__nv__chart_cache_" + object.plotId;
+
+    if(typeof(window.__zeppelin_session_debug) == "undefined") {
+        window.__zeppelin_session_debug = 0;  // no debug output
+    }
+    
+    var Logger = function(name) {
+        this.name = name;
+    }
+    Logger.prototype.info = function(msg) {
+        if (window.__zeppelin_session_debug > 0) {
+            console.info(this.name + " [INFO] " + msg)
+        }
+    }
+    Logger.prototype.debug = function(msg, obj) {
+        if (window.__zeppelin_session_debug > 1) {
+            if (typeof(obj) === "undefined") {
+                console.log(this.name + " [DEBUG] " + msg)
+            } else {
+                console.log(this.name + " [DEBUG] " + msg, obj)
+            }
+        }
+    }
+    var logger = new Logger("ZeppelinViz");
     
     d3.selectAll('.nvtooltip').style('opacity', '0');  // remove all "zombie" tooltips
 
@@ -70,7 +93,7 @@ makeChart = function(session, object, chart) {
 
     
     if (object.event == "plot") {
-        console.log("plot " + object.plotId)
+        logger.debug("plot " + object.plotId, object.data)
 
         var spec = JSON.parse(JSON.stringify(object.data));  // clone data
         var data = spec.data;
@@ -97,7 +120,7 @@ makeChart = function(session, object, chart) {
 
                            
     } else if (object.event == "saveAsPng") {
-        console.log("Save " + object.plotId + " as PNG")
+        logger.debug("Save " + object.plotId + " as PNG")
         
         saveSvgAsPng(document.getElementById(object.plotId).children[0], object.data.filename + ".png");
 
@@ -145,7 +168,7 @@ makeChart = function(session, object, chart) {
 
         var chart = session[cacheId].chart;
         var chartData = session[cacheId].chartData;
-        console.log("append: " + chart.container.parentNode.id)
+        logger.debug("append: " + chart.container.parentNode.id, newData)
         
         chartData.datum(data).transition().duration(duration).call(chart);
 
@@ -175,7 +198,7 @@ makeChart = function(session, object, chart) {
         
         var chart = session[cacheId].chart;
         var chartData = session[cacheId].chartData;
-        console.log("update: " + chart.container.parentNode.id)
+        logger.debug("update: " + chart.container.parentNode.id, changedData)
 
         chartData.datum(data).transition().duration(duration).call(chart);
         
@@ -199,7 +222,7 @@ makeChart = function(session, object, chart) {
         
         var chart = session[cacheId].chart;
         var chartData = session[cacheId].chartData;
-        console.log("delete: " + chart.container.parentNode.id)
+        logger.debug("delete: " + chart.container.parentNode.id, sortedIndices)
 
         chartData.datum(data).transition().duration(duration).call(chart);
         chart.update()
