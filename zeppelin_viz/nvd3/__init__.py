@@ -137,3 +137,19 @@ class Nvd3(object):
     def grey(self):
         digits = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"]
         return ["#%s" % (d*3) for d in digits]
+
+
+print("""
+               DEPRECATED AND NOT MAINTAINED ANY MORE
+
+
+Split into
+
+- Enabler for NVD3 in Apache Zeppelin: https://github.com/bernhard-42/advanced-angular-for-pyspark
+- NVD3 for Apache Zeppelin and IPython/Jupyter: https://github.com/bernhard-42/nvd3-stat
+- Enabler for Bokeh in Apache Zeppelin: https://github.com/bernhard-42/zeppelin-ipython-shim
+- Bokeh State Management for Apache Zeppelin: https://github.com/bernhard-42/zeppelin-bokeh
+
+
+               DEPRECATED AND NOT MAINTAINED ANY MORE
+""")
